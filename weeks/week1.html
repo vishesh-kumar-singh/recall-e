@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1: Foundations of RL | Recall-E</title>
+  <meta name="description" content="Week 1: Markov Decision Processes, Q-Learning, and setting up RL environments.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#results">Results</a></li>
+      <li><a href="../index.html#videos">Eval Videos</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </nav>
+
+  <div class="week-hero">
+    <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
+    <div class="hero-badge"><span class="dot"></span> Week 1</div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);">
+      <span class="gradient">Foundations of RL & Q-Learning</span>
+    </h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">
+      Understanding MDPs, exploration strategies, and tabular learning methods.
+    </p>
+  </div>
+
+  <div class="week-content">
+
+    <h2>Topics Covered</h2>
+    <ul>
+      <li>Teaching Markov Decision Process (MDP)</li>
+      <li>Understanding Epsilon-greedy and other exploration strategies</li>
+      <li>Tabular learning methods like Q-Learning</li>
+      <li>Drawbacks of tabular methods and motivation for deep RL</li>
+      <li>Setting up a basic RL environment with Gymnasium</li>
+    </ul>
+
+    <h2>Assignment</h2>
+    <p>Implement a Q-learning algorithm for any environment in Gymnasium. Choose an environment, implement tabular Q-learning from scratch, and demonstrate convergence.</p>
+
+    <h2>Resources</h2>
+    <div class="resource-list">
+      <a href="https://www.youtube.com/watch?v=__t2XRxXGxI" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Q Learning Explained!</h4>
+          <p>YouTube video explaining basic RL concepts and Q-Learning</p>
+        </div>
+      </a>
+      <a href="https://gymnasium.farama.org/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Gymnasium Documentation</h4>
+          <p>Official documentation for RL environments</p>
+        </div>
+      </a>
+      <a href="https://github.com/clvrai/awesome-rl-envs" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>awesome-rl-envs</h4>
+          <p>Comprehensive list of RL environments for testing</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ADD MORE RESOURCES, NOTES, OR CONTENT BELOW -->
+    <!--
+    <h2>📎 Additional Notes</h2>
+    <p>Add any supplementary material, slides, or code snippets here.</p>
+
+    <div class="code-block">
+      <pre>import gymnasium as gym
+env = gym.make("CartPole-v1")
+obs, info = env.reset()</pre>
+    </div>
+    -->
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a> · 
+      <a href="week2.html">Week 2 →</a>
+    </p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

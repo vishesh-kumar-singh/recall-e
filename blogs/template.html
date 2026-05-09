@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Title | Recall-E</title>
+  <meta name="description" content="A brief summary of the blog post.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Additional styles specific for blog reading experience */
+    .blog-header {
+      padding: 120px 48px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      color: var(--text-secondary);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .blog-meta .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bg-primary);
+    }
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+    .blog-content h2 {
+      color: var(--accent-orange);
+      margin: 48px 0 24px;
+      font-size: 1.8rem;
+    }
+    .blog-content h3 {
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      font-size: 1.4rem;
+    }
+    .blog-content p {
+      margin-bottom: 24px;
+    }
+    .blog-content img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      margin: 32px 0;
+      border: 1px solid var(--border-color);
+    }
+    .blog-content .image-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: -24px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .blog-content blockquote {
+      border-left: 4px solid var(--accent-orange);
+      padding-left: 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: rgba(232, 135, 58, 0.05);
+      padding: 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .blog-content .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      margin: 32px 0;
+      overflow-x: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#blogs">Blogs</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </nav>
+
+  <div class="blog-header">
+    <a href="../index.html#blogs" class="back-link" style="display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; margin-bottom:24px; transition:0.3s;">← Back to All Blogs</a>
+    <div class="hero-badge" style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(232,135,58,0.1); border:1px solid rgba(232,135,58,0.3); border-radius:50px; font-size:0.85rem; color:var(--accent-orange); margin-bottom:24px; font-family:'Space Mono',monospace;">
+      <span class="dot" style="width:8px; height:8px; background:var(--accent-orange); border-radius:50%; animation: pulse 2s infinite;"></span>
+      Week X Blog
+    </div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:16px;">
+      <span class="gradient" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber), var(--accent-blue)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">Blog Title Goes Here</span>
+    </h1>
+    
+    <div class="blog-meta">
+      <div style="display:flex; margin-right:8px;">
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); z-index: 2;">A1</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 1;">A2</div>
+      </div>
+      <div>
+        <div style="color: var(--text-primary); font-weight: 700;">Author 1, Author 2</div>
+        <div>Date: May 07, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <article class="blog-content">
+    <p>This is a template file for student blog submissions. The introduction should hook the reader and summarize what the post will cover. Keep paragraphs relatively short for readability on screens.</p>
+
+    <h2>Section Heading 1</h2>
+    <p>Use H2 tags for main sections. Here you can dive into the technical details of the topic you're covering this week.</p>
+    
+    <blockquote>
+      "Blockquotes are great for highlighting important concepts, key takeaways, or quotes from research papers."
+    </blockquote>
+
+    <h3>A Sub-heading (H3)</h3>
+    <p>If you need to break down a section further, use H3 tags. When discussing code or algorithms, you can use a code block like this:</p>
+
+    <div class="code-block">
+# An example Python code block
+def example_function(state):
+    """
+    Computes the action based on the given state.
+    """
+    action = policy_network(state)
+    return action
+    </div>
+
+    <p>You can also include images if you have diagrams or plots to share. Place the image file in the <code>assets/</code> directory and link it below.</p>
+
+    <!-- Example Image (uncomment to use) -->
+    <!-- 
+    <img src="../assets/your-image-here.png" alt="Description of the image">
+    <p class="image-caption">Figure 1: A brief caption explaining the image above.</p>
+    -->
+
+    <h2>Conclusion</h2>
+    <p>Wrap up the post with a summary of what was learned and perhaps a tease for what the team is working on next. Good luck!</p>
+  </article>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a>
+    </p>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>

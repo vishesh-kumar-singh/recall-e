@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recall-E | Continual Learning in Reinforcement Learning</title>
+  <meta name="description" content="Recall-E: A BCS Club Summer Project exploring continual learning in reinforcement learning for robotic control using shallow world models and PPO.">
+  <link rel="icon" href="assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Particle Background -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#results">Results</a></li>
+
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          BCS Club · Summer 2026
+        </div>
+        <h1 class="hero-title">
+          <span class="gradient">Recall-E</span><br>
+          <span class="typing-text"></span><span style="color:var(--accent-orange)">|</span>
+        </h1>
+        <p class="hero-subtitle">
+          Exploring continual learning in reinforcement learning for robotic control by 
+          teaching agents to remember while they learn.
+        </p>
+        <div class="hero-buttons">
+          <a href="#timeline" class="btn btn-primary">View Timeline →</a>
+          <a href="https://arxiv.org/abs/2507.09177" target="_blank" class="btn btn-outline">Read Paper</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section class="showcase-section">
+    <div class="showcase-grid">
+      <div class="showcase-card reveal">
+        <img src="assets/door_best_model_eval.gif" alt="Door opening task">
+        <div class="showcase-overlay">
+          <h4>Door Opening</h4>
+          <p>PPO agent trained to open a door handle in MuJoCo</p>
+        </div>
+      </div>
+      <div class="showcase-card reveal">
+        <img src="assets/peg_best_model_eval.gif" alt="Peg insertion task">
+        <div class="showcase-overlay">
+          <h4>Peg Removal</h4>
+          <p>PPO agent performing precise peg removal from hole</p>
+        </div>
+      </div>
+      <div class="showcase-card reveal">
+        <img src="assets/window_best_model_eval.gif" alt="Window opening task">
+        <div class="showcase-overlay">
+          <h4>Window Opening</h4>
+          <p>PPO agent sliding a window open in simulation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-header reveal">
+      <p class="section-tag">// What is this?</p>
+      <h2 class="section-title">About The Project</h2>
+      <p class="section-subtitle">Bridging the gap between robotic control and lifelong learning</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <h3>Robotic Controls</h3>
+        <p>Moving beyond traditional physics-based control systems to Reinforcement Learning, where algorithms discover optimal policies through exploration and interaction with the environment.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>Continual Learning</h3>
+        <p>Addressing catastrophic forgetting, which is the tendency of agents to lose previous knowledge when learning new tasks. Our goal is to build agents that remember everything they've learned.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>Shallow World Models</h3>
+        <p>Using model-based approaches with Model Predictive Control (MPC) and Cross-Entropy Method (CEM) to learn environment physics and plan optimal action sequences.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>PPO Baseline</h3>
+        <p>Implementing Proximal Policy Optimization as our model-free baseline, training on sequential tasks to demonstrate catastrophic forgetting before comparing with our approach.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>Benchmarking</h3>
+        <p>Using the Continual-Bench environment with MuJoCo physics to rigorously evaluate retention across sequential tasks and measure how well agents preserve old skills.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>Project Goals</h3>
+        <p>Demonstrate that shallow world models with MPC achieve significantly better task retention than PPO when trained sequentially on multiple robotic control tasks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline">
+    <div class="section-header reveal">
+      <p class="section-tag">// Week by Week</p>
+      <h2 class="section-title">Project Timeline</h2>
+      <p class="section-subtitle">9 weeks of progressive learning and implementation (Week 0–8)</p>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot active"><span>0</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 0: Prerequisites</span>
+          <span class="status active">● Active</span>
+          <h3>Python & ML Foundations</h3>
+          <p>Getting up to speed with Python, NumPy, and fundamental ML before diving into RL.</p>
+          <ul>
+            <li>Python basics, classes, OOPs</li>
+            <li>NumPy, Matplotlib</li>
+            <li>Linear & Logistic Regression</li>
+            <li>Neural Networks & PyTorch</li>
+          </ul>
+          <a href="weeks/week0.html" class="timeline-link">View Resources →</a>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>1</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 1</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Foundations of RL & Q-Learning</h3>
+          <p>Understanding MDPs, exploration strategies, and tabular methods.</p>
+          <ul>
+            <li>Markov Decision Processes</li>
+            <li>Epsilon-greedy and exploration strategies</li>
+            <li>Tabular Q-Learning and its limitations</li>
+            <li>Setting up Gymnasium environments</li>
+          </ul>
+          <!-- <a href="weeks/week1.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>2</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 2</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Deep Q-Networks & Hyperparameter Tuning</h3>
+          <p>Introducing model-free deep RL with function approximation.</p>
+          <ul>
+            <li>Introduction to DQN (value-based method)</li>
+            <li>Double DQN improvements</li>
+            <li>Hyperparameter tuning strategies</li>
+            <li>Implementing DQN for game-playing agents</li>
+          </ul>
+          <!-- <a href="weeks/week2.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>3</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 3</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>PPO & Baseline Implementation</h3>
+          <p>Policy gradient methods and first simulation results.</p>
+          <ul>
+            <li>Proximal Policy Optimization theory</li>
+            <li>Setting up Continual-Bench & MuJoCo</li>
+            <li>Training arm for single task</li>
+            <li>First simulation run</li>
+          </ul>
+          <!-- <a href="weeks/week3.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>4</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 4: Mid Eval</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Introduction to Continual Learning</h3>
+          <p>The core problem: catastrophic forgetting in sequential task learning.</p>
+          <ul>
+            <li>Other RL algorithms (SAC overview)</li>
+            <li>The Continual Learning problem</li>
+            <li>Multi-task PPO demonstrating forgetting</li>
+          </ul>
+          <div class="eval-banner" style="margin-top:16px; padding:16px; text-align:left;">
+            <h3 style="font-size:0.95rem;">Mid Evaluation</h3>
+            <p style="font-size:0.85rem;">Q-Learning, DQN, PPO implementation complete. Single-task arm simulation. Catastrophic forgetting demonstrated.</p>
+          </div>
+          <!-- <a href="weeks/week4.html" class="timeline-link" style="margin-top:12px;">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>5</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 5</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Model-Based Algorithms</h3>
+          <p>Shifting from model-free to model-based RL approaches.</p>
+          <ul>
+            <li>Introduction to model-based RL</li>
+            <li>Deep World Models: Dreamer</li>
+            <li>Shallow World Model architecture</li>
+            <li>Implementing a deep-world algorithm</li>
+          </ul>
+          <!-- <a href="weeks/week5.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>6</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 6</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Model Predictive Controls</h3>
+          <p>Planning and control with learned dynamics models.</p>
+          <ul>
+            <li>MPC + Cross-Entropy Method</li>
+            <li>The main algorithm architecture</li>
+            <li>Shallow world models with MPC for single task</li>
+          </ul>
+          <!-- <a href="weeks/week6.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>7</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 7</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Continual Learning with Shallow World Models</h3>
+          <p>The main event: comparing retention across approaches.</p>
+          <ul>
+            <li>Extending to multi-task sequential learning</li>
+            <li>Measuring and comparing retention</li>
+            <li>Shallow world models vs PPO analysis</li>
+          </ul>
+          <!-- <a href="weeks/week7.html" class="timeline-link">View Resources →</a> -->
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><span>8</span></div>
+        <div class="timeline-card">
+          <span class="timeline-week">Week 8</span>
+          <span class="status upcoming">Upcoming</span>
+          <h3>Final Analysis & Experimentation</h3>
+          <p>Hyperparameter experiments and final report.</p>
+          <ul>
+            <li>Sampling size experiments</li>
+            <li>Projection dimension tuning</li>
+            <li>Task ordering analysis</li>
+            <li>Final report formulation</li>
+          </ul>
+          <div class="eval-banner" style="margin-top:16px; padding:16px; text-align:left;">
+            <h3 style="font-size:0.95rem;">End Evaluation</h3>
+            <p style="font-size:0.85rem;">Multi-task arm simulation with shallow world models. Demonstrated better retention. Full analysis report.</p>
+          </div>
+          <!-- <a href="weeks/week8.html" class="timeline-link" style="margin-top:12px;">View Resources →</a> -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources">
+    <div class="section-header reveal">
+      <p class="section-tag">// Learning Material</p>
+      <h2 class="section-title">Current Resources</h2>
+      <p class="section-subtitle">Week 0 prerequisites: Python & ML foundations</p>
+    </div>
+
+    <!-- Featured Paper -->
+    <div class="eval-banner reveal" style="max-width:900px; margin:0 auto 48px;">
+      <h3>Inspiration Paper: ICML 2025</h3>
+      <p style="margin-bottom:16px;">"Shallow World Models for Continual Reinforcement Learning" is the foundation of our approach to solving catastrophic forgetting.</p>
+      <a href="https://arxiv.org/abs/2507.09177" target="_blank" class="btn btn-primary" style="display:inline-flex;">Read on arXiv →</a>
+    </div>
+
+    <div class="resources-grid">
+      <a href="weeks/week0.html" class="resource-card reveal">
+        <span class="resource-type docs">Week 0</span>
+        <h4>Python & ML Foundations</h4>
+        <p>Full resource list: Python basics, NumPy, Matplotlib, Regression, Neural Networks, PyTorch.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Blogs Section -->
+  <section id="blogs">
+    <div class="section-header reveal">
+      <p class="section-tag">// Insights</p>
+      <h2 class="section-title">Student Blogs</h2>
+      <p class="section-subtitle">Weekly deep dives into RL concepts written by the team</p>
+    </div>
+    
+    <div class="resources-grid">
+      <!-- To add a new blog, copy this card format
+      <a href="blogs/template.html" class="resource-card reveal">
+        <span class="resource-type docs">Template</span>
+        <h4>Blog Title Goes Here</h4>
+        <p>A brief summary of what the blog post is about. This is just a placeholder template for students.</p>
+        <div style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <span>By Student Name 1, Student Name 2</span>
+          <span>Week X</span>
+        </div>
+      </a>
+      -->
+      <!-- Placeholder when there are no blogs -->
+      <div class="resource-card reveal" style="border-style: dashed; display: flex; align-items: center; justify-content: center; min-height: 150px; flex-direction: column;">
+        <span style="font-size: 2rem; margin-bottom: 8px;">✍️</span>
+        <h4 style="color: var(--text-muted); text-align: center;">First blog coming soon!</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team">
+    <div class="section-header reveal">
+      <p class="section-tag">// The People</p>
+      <h2 class="section-title">Mentors</h2>
+      <p class="section-subtitle">Brain & Cognitive Science Club, IIT Kanpur</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar"><img src="assets/vk.png" alt="Vishesh Kumar Singh"></div>
+        <h4>Vishesh Kumar Singh</h4>
+        <p class="role">Mentor</p>
+        <p class="email">visheshk24@iitk.ac.in</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar"><img src="assets/am.png" alt="Aditi Mishra"></div>
+        <h4>Aditi Mishra</h4>
+        <p class="role">Mentor</p>
+        <p class="email">aditikm24@iitk.ac.in</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar"><img src="assets/ag.png" alt="Aayush Gajeshwar"></div>
+        <h4>Aayush Gajeshwar</h4>
+        <p class="role">Mentor</p>
+        <p class="email">aayushk24@iitk.ac.in</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar"><img src="assets/kc.png" alt="Kushagra Chandra" id="kc-avatar"></div>
+        <h4>Kushagra Chandra</h4>
+        <p class="role">Mentor</p>
+        <p class="email">kushagrac4@iitk.ac.in</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results">
+    <div class="section-header reveal">
+      <p class="section-tag">// Findings</p>
+      <h2 class="section-title">Results & Report</h2>
+      <p class="section-subtitle">Experimental results and final analysis</p>
+    </div>
+    <div class="results-placeholder reveal">
+      <h3>Coming Soon</h3>
+      <p>Results, analysis, and the final report will be published here after the project concludes in Week 8.</p>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span style="font-size:1.2rem; font-weight:700;">Recall<span style="color:var(--accent-orange)">-E</span></span>
+    </div>
+    <p>
+      Brain & Cognitive Science Club · IIT Kanpur · Summer Project 2026<br>
+      Inspired by <a href="https://arxiv.org/abs/2507.09177" target="_blank">arXiv:2507.09177</a> (ICML 2025)
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

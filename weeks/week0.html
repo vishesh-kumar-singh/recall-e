@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 0: Prerequisites | Recall-E</title>
+  <meta name="description" content="Week 0: Python, NumPy, ML foundations, Neural Networks. Everything you need before diving into RL.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </nav>
+
+  <div class="week-hero">
+    <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
+    <div class="hero-badge"><span class="dot"></span> Week 0: Prerequisites</div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);">
+      <span class="gradient">Python & ML Foundations</span>
+    </h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">
+      Getting up to speed with Python, data libraries, and fundamental ML algorithms before we dive into RL.
+    </p>
+  </div>
+
+  <div class="week-content">
+
+    <!-- ========== ENVIRONMENT SETUP ========== -->
+    <h2>Environment Setup</h2>
+    <p>Before starting with a programming language, we'll set up an IDE. Basically, these are programming environments where you would write your code (looks cool :) ). We recommend VS Code, but feel free to use any IDE of your choice. We'll also set up Anaconda for managing Python packages, and optionally Google Colab if you prefer working in the cloud.</p>
+    <div class="resource-list">
+      <a href="https://youtu.be/D2cwvpJSBX4" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Getting Started with Python in VS Code</h4>
+          <p>Official setup guide for the IDE</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/YJC6ldI3hWk" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Anaconda: Installation & Using Conda</h4>
+          <p>Managing packages and environments with Conda</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=inN8seMm7UI" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Google Colab Tutorial for Beginners</h4>
+          <p>Introduction to cloud-based Jupyter notebooks</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== VERSION CONTROL ========== -->
+    <h2>Version Control (Git & GitHub)</h2>
+    <p>Git is a version control system that lets you track changes in your code and collaborate with others. GitHub is where we'll host our project repositories. You'll be using these throughout the project to submit assignments and collaborate with your team.</p>
+    <div class="resource-list">
+      <a href="https://www.youtube.com/watch?v=8oRjP8yj2Wo" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>A Brief Introduction to Git for Beginners</h4>
+          <p>Basic Git concepts and workflow</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=0fKg7e37bQE" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>How to Upload Files and Folders to GitHub</h4>
+          <p>Practical guide for using the GitHub UI</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== PYTHON BASICS ========== -->
+    <h2>Python Basics</h2>
+    <p>Python is the language we'll use for everything in this project, from simple scripts to training RL agents. Make sure you're comfortable with the fundamentals: variables, loops, functions, and especially classes (OOPs), since most ML libraries are built around them. If you already know Python, skim through these as a refresher.</p>
+    <ul>
+      <li>Variables, data types, control flow, functions</li>
+      <li>List comprehensions, lambda expressions</li>
+      <li>Classes and basic OOPs concepts</li>
+    </ul>
+    <div class="resource-list">
+      <a href="https://www.w3schools.com/python/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>W3Schools Python Tutorial</h4>
+          <p>Interactive reference for Python syntax and concepts</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Learn Python: Full Course for Beginners</h4>
+          <p>Comprehensive beginner-friendly full course</p>
+        </div>
+      </a>
+      <a href="https://medium.com/swlh/everything-about-python-86f3b06385d1" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Everything About Python (Medium)</h4>
+          <p>Detailed article covering Python fundamentals</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== NUMPY & MATPLOTLIB ========== -->
+    <h2>NumPy & Matplotlib</h2>
+    <p>NumPy is the backbone of numerical computing in Python. You'll use it for everything from matrix operations to handling environment states. Matplotlib lets you visualize training curves, rewards, and agent behavior. Both are essential tools you'll use daily.</p>
+    <div class="resource-list">
+      <a href="https://www.w3schools.com/python/numpy/default.asp" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>W3Schools NumPy Tutorial</h4>
+          <p>Interactive NumPy reference</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=QUT1VHiLmmI" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>NumPy Tutorial for Beginners</h4>
+          <p>Video walkthrough of NumPy array operations</p>
+        </div>
+      </a>
+      <a href="https://www.w3schools.com/python/matplotlib/default.asp" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>W3Schools Matplotlib Tutorial</h4>
+          <p>Interactive Matplotlib reference</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=OZOOLe2mZ6Y" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Matplotlib Crash Course</h4>
+          <p>Quick introduction to data visualization in Python</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== MATHEMATICS ========== -->
+    <h2>Mathematics (Probability)</h2>
+    <p>Reinforcement Learning is built on probability theory. Understanding Bayes' theorem, probability distributions, and the law of large numbers will help you grasp why RL algorithms work the way they do. Don't worry, we only need the intuition, not rigorous proofs.</p>
+    <div class="resource-list">
+      <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Bayes Theorem: 3Blue1Brown</h4>
+          <p>Beautiful visual explanation of Bayes' theorem</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/playlist?list=PL2SOU6vxJW8_Vv9XJWu_m0_UiwI_vHAnM" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Probability Distributions Playlist</h4>
+          <p>Focused playlist on probability distributions</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=MntX3zWNWzY" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Law of Large Numbers</h4>
+          <p>Understanding convergence and statistical foundations</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== ML FOUNDATIONS ========== -->
+    <h2>Machine Learning Foundations</h2>
+    <p>Before jumping into RL, it helps to understand how machines learn from data. Linear and logistic regression are the simplest ML algorithms and introduce key concepts like cost functions, gradient descent, and overfitting that carry over directly to deep RL.</p>
+    <ul>
+      <li>Linear Regression: fitting a line, cost function, gradient descent</li>
+      <li>Logistic Regression: sigmoid function, binary classification</li>
+      <li>Evaluation: confusion matrix, train-test split</li>
+    </ul>
+    <div class="resource-list">
+      <a href="https://www.youtube.com/watch?v=KNAWp2S3w94" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>ML Zero to Hero: Part 1</h4>
+          <p>Intro to Machine Learning concepts</p>
+        </div>
+      </a>
+      <a href="https://www.analyticsvidhya.com/blog/2021/10/everything-you-need-to-know-about-linear-regression/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Linear Regression: Comprehensive Guide</h4>
+          <p>Analytics Vidhya deep-dive on linear regression</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=yIYKR4sgzI8" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Logistic Regression: StatQuest</h4>
+          <p>Clear visual explanation of logistic regression</p>
+        </div>
+      </a>
+      <a href="https://www.analyticsvidhya.com/blog/2021/08/conceptual-understanding-of-logistic-regression-for-data-science-beginners/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Logistic Regression: Conceptual Guide</h4>
+          <p>Analytics Vidhya beginner-friendly article</p>
+        </div>
+      </a>
+      <a href="https://www.analyticsvidhya.com/blog/2020/04/confusion-matrix-machine-learning/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Confusion Matrix Explained</h4>
+          <p>Understanding evaluation metrics for classification</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ========== NEURAL NETWORKS ========== -->
+    <h2>Neural Networks</h2>
+    <p>Neural networks are the function approximators that make deep RL possible. In this project, we'll use them as policy networks (PPO) and world models. Understanding how a basic neural net learns through backpropagation is essential, and the 3Blue1Brown series is a must-watch.</p>
+    <ul>
+      <li>Perceptrons and multi-layer perceptrons</li>
+      <li>Activation functions, backpropagation</li>
+      <li>CNNs (overview)</li>
+      <li>PyTorch / TensorFlow / Scikit-learn intro</li>
+    </ul>
+    <div class="resource-list">
+      <a href="https://medium.com/deep-learning-demystified/introduction-to-neural-networks-part-1-e13f132c6d7e" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Intro to Neural Networks: Part 1</h4>
+          <p>Deep Learning Demystified on Medium</p>
+        </div>
+      </a>
+      <a href="https://medium.com/deep-learning-demystified/introduction-to-neural-networks-part-2-c261a99f4138" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Intro to Neural Networks: Part 2</h4>
+          <p>Continuation: backpropagation and training</p>
+        </div>
+      </a>
+      <a href="https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Understanding CNNs</h4>
+          <p>Convolutional Neural Networks overview</p>
+        </div>
+      </a>
+      <a href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>PyTorch Basics Tutorial</h4>
+          <p>Official PyTorch quickstart for building neural networks</p>
+        </div>
+      </a>
+      <a href="https://www.tensorflow.org/tutorials/quickstart/beginner" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>TensorFlow Quickstart</h4>
+          <p>Official TensorFlow beginner tutorial</p>
+        </div>
+      </a>
+      <a href="https://www.geeksforgeeks.org/learning-model-building-scikit-learn-python-machine-learning-library/" target="_blank" class="resource-item">
+        
+        <div class="r-info">
+          <h4>Scikit-learn Model Building</h4>
+          <p>GeeksforGeeks guide to scikit-learn</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a> · 
+      <a href="week1.html">Week 1 →</a>
+    </p>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
