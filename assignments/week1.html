@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 Assignment | Recall-E</title>
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#results">Results</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </nav>
+
+  <div class="week-hero">
+    <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
+    <div class="hero-badge"><span class="dot"></span> Week 1</div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);">
+      <span class="gradient">Week 1 Assignment</span>
+    </h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">
+      Formulating your world as MDP and The Epsilon-Decay Challenge
+    </p>
+  </div>
+
+  <div class="week-content">
+    <h2>Assignment Instructions</h2>
+    <div class="assignment-block">
+      <p><strong>Recommendation:</strong> Submit your assignment after forking the repository <a href="https://github.com/vishesh-kumar-singh/recall-e-assignments" target="_blank">vishesh-kumar-singh/recall-e-assignments</a>. In the <code>week-1</code> folder, create a folder named <code>[name]-[roll]</code> (for example, <code>vishesh-241176</code>). In that folder, put task-1 as a PDF, task-2 python files, and a <code>README.md</code> with instructions to run your code along with your analysis section. Plots should be rendered in the README.</p>
+
+      <h3>1. Formulating your world as MDP</h3>
+      <ul>
+        <li><strong>Design an MDP:</strong> Choose a simple daily scenario (e.g., deciding whether to study, sleep, or hang out; or navigating between specific campus buildings). Formally define the State space ($\mathcal{S}$), Action space ($\mathcal{A}$), Transition probabilities ($\mathcal{P}$), and Rewards ($\mathcal{R}$).</li>
+        <li><strong>Manual Calculation:</strong> For a highly simplified 3-state version of your scenario, perform Value Iteration by hand for exactly two steps, assuming a discount factor $\gamma = 0.9$.</li>
+      </ul>
+
+      <h3>2. The Epsilon-Decay Challenge</h3>
+      <ul>
+        <li><strong>Implementation:</strong> Implement tabular Q-learning on the <code>CliffWalking-v0</code> environment in Gymnasium.</li>
+        <li><strong>Experimentation:</strong> Train three separate agents, each using a different exploration strategy:
+          <ul>
+            <li>Constant high exploration ($\epsilon = 0.5$).</li>
+            <li>Constant low exploration ($\epsilon = 0.05$).</li>
+            <li>Decaying exploration (start at $\epsilon = 1.0$ and decay linearly or exponentially to $0.01$).</li>
+          </ul>
+        </li>
+        <li><strong>Analysis:</strong> Plot the sum of rewards per episode for all three agents on a single graph. Which agent learns a safe path the fastest? Which one ultimately finds the most optimal path, and why is there a difference?</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a> · 
+      <a href="../weeks/week1.html">Week 1 Resources →</a>
+    </p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
