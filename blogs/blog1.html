@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching Machines to Learn from Experience: MDPs and Q-Learning | Recall-E</title>
+  <meta name="description" content="An intuitive walkthrough of Reinforcement Learning, Markov Decision Processes, the Bellman equation, and Q-Learning — with code along the way.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    /* Additional styles specific for blog reading experience */
+    .blog-header {
+      padding: 120px 48px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      color: var(--text-secondary);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .blog-meta .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bg-primary);
+    }
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+    .blog-content h2 {
+      color: var(--accent-orange);
+      margin: 48px 0 24px;
+      font-size: 1.8rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+    .blog-content h3 {
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      font-size: 1.4rem;
+    }
+    .blog-content p {
+      margin-bottom: 24px;
+    }
+    .blog-content ul, .blog-content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .blog-content li {
+      margin-bottom: 8px;
+      color: #e0e0e0;
+    }
+    .blog-content img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      margin: 32px 0;
+      border: 1px solid var(--border-color);
+    }
+    .blog-content .image-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: -24px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .blog-content blockquote {
+      border-left: 4px solid var(--accent-orange);
+      padding-left: 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: rgba(232, 135, 58, 0.05);
+      padding: 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .blog-content .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      margin: 32px 0;
+      overflow-x: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+    }
+    .blog-content .code-block pre {
+      margin: 0;
+      font-family: inherit;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#blogs">Blogs</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </nav>
+
+  <div class="blog-header">
+    <a href="../index.html#blogs" class="back-link" style="display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; margin-bottom:24px; transition:0.3s;">← Back to All Blogs</a>
+    <div class="hero-badge" style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(232,135,58,0.1); border:1px solid rgba(232,135,58,0.3); border-radius:50px; font-size:0.85rem; color:var(--accent-orange); margin-bottom:24px; font-family:'Space Mono',monospace;">
+      <span class="dot" style="width:8px; height:8px; background:var(--accent-orange); border-radius:50%; animation: pulse 2s infinite;"></span>
+      Week 1 Blog
+    </div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:16px;">
+      <span class="gradient" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber), var(--accent-blue)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">Teaching Machines to Learn from Experience: MDPs and Q-Learning</span>
+    </h1>
+    
+    <div class="blog-meta">
+      <div style="display:flex; margin-right:8px;">
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); z-index: 5;">T</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 4;">S</div>
+      </div>
+      <div style="text-align: left;">
+        <div style="color: var(--text-primary); font-weight: 700;">Tejas, Saurav</div>
+        <div>Date: May 23, 2026</div>
+      </div>
+    </div>
+  </div>  
+
+  <article class="blog-content">
+    <p>Imagine teaching a dog to sit. You don't hand it a manual. You don't show it a thousand labeled photos of "sitting dog." You just say "sit", wait, and give it a treat when it gets it right. Over many tries, the dog figures out what earns the treat and starts doing it reliably.</p>
+
+    <p>That, in spirit, is Reinforcement Learning (RL).</p>
+
+    <p>This week, we're diving into the foundations of RL that power a huge chunk of what the Recall-E project is trying to do — from Markov Decision Processes to Q-Learning. No heavy math, just the intuition. Let's go.</p>
+
+    <h2>What Even Is Reinforcement Learning?</h2>
+
+    <p>Before we get into RL, let's quickly look at the ML landscape so we know what we're contrasting with.</p>
+
+    <p><strong>Supervised Learning</strong> is like studying with an answer key. You give the model input-output pairs — "this image is a cat, this one is a dog" — and it learns to map inputs to correct outputs. The labels are handed to it.</p>
+
+    <p><strong>Unsupervised Learning</strong> is like exploring a new city with no map. You give the model raw data with no labels, and it tries to find hidden structure — clusters, patterns, anomalies — on its own.</p>
+
+    <p><strong>Reinforcement Learning</strong> is neither. There's no answer key. There's no pre-labeled data. Instead, there's an <strong>agent</strong> (the learner), an <strong>environment</strong> (the world it acts in), and a <strong>reward signal</strong> (a score that tells it how well it's doing <em>after the fact</em>).</p>
+
+    <p>The agent tries things, sees what happens, gets a reward (or a penalty), and gradually learns which actions lead to better outcomes. It's learning by doing — trial, error, and feedback.</p>
+
+    <blockquote>
+      <strong>The Key Difference: In supervised learning, you're told the right answer. In RL, you only know <em>how good</em> your answer was, and sometimes only much later.</strong>
+    </blockquote>
+
+    <p>A few classic examples where RL shines:</p>
+    <ul>
+      <li>An agent learning to play chess (the reward only comes at the end — win or lose)</li>
+      <li>A robot learning to walk (small rewards for staying upright, penalties for falling)</li>
+    </ul>
+
+    <h2>Markov Decision Processes (MDPs)</h2>
+
+    <p>Okay, so RL is about an agent learning in an environment. But to actually <em>build</em> and <em>reason about</em> these systems, we need a formal framework. That framework is the <strong>Markov Decision Process</strong>, or MDP.</p>
+
+    <p>Think of an MDP as the rulebook of the game. It has four main ingredients:</p>
+
+    <h3>States (S) — "Where am I?"</h3>
+
+    <p>A <strong>state</strong> is a snapshot of the world at a given moment. In a chess game, the state is the current position of all pieces on the board. In a video game, it might be your character's position, health, and what enemies are nearby.</p>
+
+    <p>The key assumption in an MDP is the <strong>Markov Property</strong>: <em>the future depends only on the present state, not on how you got there.</em> In other words, yesterday's moves don't matter — only where things stand right now. This is a simplification, but a powerful one.</p>
+
+    <h3>Actions (A) — "What can I do?"</h3>
+
+    <p>From any state, the agent can choose an <strong>action</strong>. In chess, actions are the legal moves. In a grid world, maybe it's {up, down, left, right}.</p>
+
+    <h3>Transitions (T) — "What happens next?"</h3>
+
+    <p>When you take an action, something happens — you move to a new state. Simple as that. Sometimes the world is predictable: press right, move right. But sometimes it's not — like a robot walking on a slippery floor. You try to go right, but maybe you slip and end up somewhere else. Transitions capture exactly this: what state do you land in after taking an action?</p>
+
+    <h3>Rewards (R) — "Was that good?"</h3>
+
+    <p>After every transition, the environment gives the agent a <strong>reward</strong> — a number that can be positive (great move!) or negative (walked into a wall). The agent's job is to learn a <strong>policy</strong> (a strategy: "given state X, take action Y") that <em>maximizes the total reward it accumulates over time</em>.</p>
+
+    <p>Here's a tiny code sketch of an MDP-like setup using OpenAI Gym's FrozenLake:</p>
+
+    <div class="code-block"><pre>import gymnasium as gym
+
+# A simple grid-world environment
+# The agent must reach the goal without falling into holes
+env = gym.make("FrozenLake-v1", is_slippery=True)
+
+state, _ = env.reset()
+print(f"Starting state: {state}")
+
+# Take a random action (0=Left, 1=Down, 2=Right, 3=Up)
+action = env.action_space.sample()
+next_state, reward, terminated, truncated, info = env.step(action)
+
+print(f"Action: {action}, Next State: {next_state}, Reward: {reward}")</pre></div>
+
+    <h2>Exploration vs. Exploitation: The Great Balancing Act</h2>
+
+    <p>Imagine it's movie night.</p>
+
+    <ul>
+      <li><strong>Exploitation</strong> is rewatching your favorite show. You know exactly what you're getting, and you're guaranteed a good time. You're playing it safe with what you already know.</li>
+      <li><strong>Exploration</strong> is picking a random, unknown movie. It might be awful and ruin your night — but it could also become your new all-time favorite!</li>
+    </ul>
+
+    <p>An AI faces this exact same choice every time it makes a move.</p>
+
+    <p>If it only plays safe (exploits), it might get stuck with a low score forever because it never looked for a better path. If it only tries random things (explores), it never actually uses what it learned to win.</p>
+
+    <p>The secret is <strong>balance</strong>. A good AI starts by exploring wildly to learn how its world works. Then, over time, it slowly shifts to exploiting that knowledge to get the highest score possible.</p>
+
+    <p>This is captured by the <strong>&epsilon;-greedy strategy</strong> (epsilon-greedy): with probability &epsilon;, pick a random action (explore); otherwise, pick the best known action (exploit). As training progresses, &epsilon; is gradually decayed — you'll see this in the Q-Learning code below.</p>
+
+    <blockquote>
+      <strong>The Main Point: Too much exploitation = you get stuck in a local optimum. Too much exploration = you never cash in on what you've learned. Great RL agents learn when to be bold and when to be disciplined.</strong>
+    </blockquote>
+
+    <h2>The Bellman Equation: Thinking About the Future</h2>
+
+    <p>A smart agent doesn't just care about the reward right in front of it. It thinks ahead. A small loss now might be worth a big win later.</p>
+
+    <p>That's the core idea behind the <strong>Bellman Equation</strong>. In simple words:</p>
+
+    <blockquote>
+      <strong>The value of being somewhere = the reward you get now + the best reward you can get from here onwards.</strong>
+    </blockquote>
+
+    <p>As a formula:</p>
+    <div class="code-block"><pre>Value(state) = Immediate Reward + &gamma; &times; Value(best next state)</pre></div>
+
+    <p>That <code>&gamma;</code> (gamma) is called the <strong>discount factor</strong>. It's a number between 0 and 1 that controls how much the agent cares about future rewards. A gamma close to 1 means the agent is patient — future rewards matter a lot. A gamma close to 0 means the agent is greedy — it only cares about right now.</p>
+
+    <p>Think of it this way: ₹100 today feels more valuable than ₹100 a year from now. Gamma captures exactly that.</p>
+
+    <p>Now in Q-Learning, instead of just asking "how good is this state?", we ask "how good is taking this specific action in this state?" That's what a <strong>Q-value</strong> is. Written out:</p>
+
+    <p>$$Q(s, a) = r + \gamma \max_{a'} Q(s', a')$$</p>
+
+    <p>In plain words: the score for taking action <code>a</code> in state <code>s</code> is the reward you got, plus the best score possible from the next state.</p>
+
+    <h3>Why Do We Need a Learning Rate?</h3>
+
+    <p>Early in training, the agent has no idea what the future looks like. The Q-table starts at zero, which means those future Q-values it's relying on are basically just guesses. If we fully trusted the Bellman equation from the start, we'd be computing answers from wrong inputs — and those errors would keep piling up and making things worse.</p>
+
+    <p>So instead of jumping straight to the answer, we take small steps. That's what the <strong>learning rate &alpha;</strong> is for. Each time the agent learns something new, it doesn't throw out its old belief completely — it just nudges it a little in the right direction:</p>
+
+    <p>$$Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]$$</p>
+
+    <p>Breaking it down:</p>
+    <ul>
+      <li><code>r</code> — the reward the agent just got</li>
+      <li><code>max_a' Q(s', a')</code> — the best Q-value from the next state (the agent's current guess about the future)</li>
+      <li><code>&alpha;</code> (alpha) — the learning rate. High alpha means "update a lot from this." Low alpha means "only shift a little."</li>
+      <li>The part in brackets — how far off the old estimate was</li>
+    </ul>
+
+    <p>It's like adjusting your opinion slowly. You hear one new piece of information and you don't completely change your mind — you just update a little. Do that thousands of times, and eventually you get pretty close to the truth.</p>
+
+    <h2>Q-Learning: Putting It All Together</h2>
+
+    <p>Q-Learning is an algorithm that uses the Bellman equation repeatedly to learn the optimal policy. Here's the big picture:</p>
+
+    <ol>
+      <li>Build a <strong>Q-table</strong> — a big grid where rows are states and columns are actions. Initialize everything to zero.</li>
+      <li>For each step: observe state &rarr; pick action (&epsilon;-greedy) &rarr; get reward &rarr; observe new state &rarr; update Q-table using the Bellman equation.</li>
+      <li>Repeat millions of times until the Q-values stabilize.</li>
+    </ol>
+
+    <p>Once trained, the policy is simple: in any state, just pick the action with the highest Q-value.</p>
+
+    <p>Here's a full Q-Learning implementation on FrozenLake:</p>
+
+    <div class="code-block"><pre>import gymnasium as gym
+import numpy as np
+
+# Environment setup
+env = gym.make("FrozenLake-v1", is_slippery=False)
+n_states = env.observation_space.n   # 16 states in a 4x4 grid
+n_actions = env.action_space.n       # 4 actions: Left, Down, Right, Up
+
+# Hyperparameters
+alpha = 0.8      # Learning rate
+gamma = 0.95     # Discount factor
+epsilon = 1.0    # Starting exploration rate
+epsilon_decay = 0.001
+min_epsilon = 0.01
+n_episodes = 10000
+
+# Initialize Q-table to zeros
+q_table = np.zeros((n_states, n_actions))
+
+# Training loop
+for episode in range(n_episodes):
+    state, _ = env.reset()
+    done = False
+
+    while not done:
+        # &epsilon;-greedy action selection
+        if np.random.uniform(0, 1) < epsilon:
+            action = env.action_space.sample()  # Explore
+        else:
+            action = np.argmax(q_table[state])  # Exploit
+
+        # Take action, observe result
+        next_state, reward, terminated, truncated, _ = env.step(action)
+        done = terminated or truncated
+
+        # Bellman update
+        best_next_q = np.max(q_table[next_state])
+        td_error = reward + gamma * best_next_q - q_table[state, action]
+        q_table[state, action] += alpha * td_error
+
+        state = next_state
+
+    # Decay epsilon (explore less as we learn more)
+    epsilon = max(min_epsilon, epsilon - epsilon_decay)
+
+print("Training complete!")
+print("Q-table:\n", q_table)
+
+# Quick evaluation
+wins = 0
+for _ in range(100):
+    state, _ = env.reset()
+    done = False
+    while not done:
+        action = np.argmax(q_table[state])  # Always exploit during eval
+        state, reward, terminated, truncated, _ = env.step(action)
+        done = terminated or truncated
+        if reward == 1:
+            wins += 1
+
+print(f"Win rate after training: {wins}%")</pre></div>
+
+    <p>After enough training, the agent learns a solid policy for navigating the grid world — purely through trial and error, no labeled data, no explicit programming of the rules.</p>
+
+    <h2>Drawbacks of Q-Learning</h2>
+
+    <p>Q-Learning is a great starting point, but it has some real pain points. Here's where it starts to struggle:</p>
+
+    <p><strong>1. It can't handle big, complex worlds</strong></p>
+    <p>The Q-table stores one entry for every possible state. For a tiny grid world, that's totally fine. But imagine trying to do this for a video game — the number of possible screen states is so massive, no table could ever hold it all. It's like trying to write down every possible position every grain of sand on a beach could be in. Just not practical.</p>
+
+    <p><strong>2. It only works when choices are clear-cut</strong></p>
+    <p>Q-Learning is great when actions are simple and countable — go left, go right, jump. But what if the action is something like "how hard should I push this door?" That's not a list of options anymore, it's a sliding scale. Q-Learning has no way to handle that kind of decision.</p>
+
+    <p><strong>3. It needs a LOT of practice</strong></p>
+    <p>Q-Learning learns by doing — thousands, sometimes millions of tries. In a video game simulation, that's fine, you just let it run overnight. But imagine a robot in the real world that needs to fall over a million times before it learns to walk. Not great. Every mistake costs time, money, or in some cases, could even cause harm.</p>
+
+    <p><strong>4. It assumes you can see everything</strong></p>
+    <p>Q-Learning works best when the agent has the full picture of what's going on. But real life is messier. A robot can't see around corners. A doctor can't know everything about a patient from a few test results. When the agent is working with incomplete information, Q-Learning starts making poor decisions.</p>
+
+    <p><strong>5. It does exactly what you tell it — even if that's not what you meant</strong></p>
+    <p>You'd think giving an AI a reward signal would be straightforward. But agents are sneaky — they'll find any loophole to maximize that score, even if it means doing something completely unintended. There's a famous example of an RL agent in a boat racing game that figured out it could score more points by spinning in circles collecting bonuses than by actually finishing the race. Technically correct. Completely useless.</p>
+
+    <p><strong>6. It tends to be overconfident</strong></p>
+    <p>Q-Learning has a habit of thinking things are better than they actually are. When it picks the "best" action during training, it slightly inflates how good that action looks in hindsight. Over time, these small overestimates pile up, and the agent ends up chasing a distorted picture of reality. A smarter version called Double Q-Learning was built specifically to fix this blind spot.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>Let's recap the journey:</p>
+    <ul>
+      <li><strong>RL</strong> is a learning paradigm where an agent learns by interacting with an environment — no labels needed, just rewards.</li>
+      <li><strong>MDPs</strong> give us a clean formalism: states, actions, transitions, and rewards. They're the rulebook every RL algorithm is playing by.</li>
+      <li>The <strong>exploration-exploitation tradeoff</strong> is the eternal question: do you stick with what works, or gamble on something better?</li>
+      <li>The <strong>Bellman equation</strong> is the recursive insight that value = immediate reward + discounted future value. It's the engine behind almost all RL algorithms.</li>
+      <li><strong>Q-Learning</strong> puts it all together into a practical algorithm that fills a Q-table through repeated experience.</li>
+      <li>But Q-Learning <strong>breaks down</strong> at scale — large state spaces, continuous actions, partial observability, and sample inefficiency are all open problems that motivated the modern deep RL revolution.</li>
+    </ul>
+  </article>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a>
+    </p>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
