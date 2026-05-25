@@ -50,18 +50,59 @@
       <li>Hyperparameter tuning strategies</li>
     </ul>
 
-    <h2>Assignment</h2>
-    <p>Implement a Deep Q-Network (DQN) for a game-playing agent. Extend to Double DQN and compare performance. Experiment with different hyperparameter configurations.</p>
-
     <h2>Resources</h2>
-    <div class="resource-list">
-      <a href="#" class="resource-item">
-        
-        <div class="r-info">
-          <h4>DQN Explained!</h4>
-          <p>YouTube video explaining DQN concepts</p>
-        </div>
-      </a>
+
+    <div class="narrative-section">
+      <p>Till the last week, we depended a lot on videos and blogs to learn things, but from this week onwards we would push you towards actually reading research papers.</p>
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">Deep Q-Learning</h3>
+      <p>Q-Learning also has an important limitation.</p>
+      <p>The algorithm stores values in a table. This works fine for small environments like GridWorld or FrozenLake, but becomes impossible for large state spaces.</p>
+      <p>Imagine trying to store Q-values for:</p>
+      <ul>
+        <li>every frame of a video game,</li>
+        <li>every robot configuration,</li>
+        <li>or every possible driving situation.</li>
+      </ul>
+      <p>The table would become unimaginably large.</p>
+      <p>This limitation eventually leads us toward one of the biggest breakthroughs in RL:</p>
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">Deep Q-Networks</h3>
+      <p>Where neural networks are used to approximate Q-values instead of storing them explicitly in a table.</p>
+      <p>Instead of maintaining a huge lookup table, DQN uses a neural network which takes the current state as input and predicts the Q-values for all possible actions. This allows the agent to generalize between similar states instead of memorizing every possible situation independently.</p>
+      <p>However, training neural networks inside RL is far more unstable than standard supervised learning. Unlike image classification where the dataset remains fixed, RL agents continuously generate their own training data while learning. This makes the targets constantly change during training.</p>
+      <p>To stabilize learning, DQN introduced two major ideas:</p>
+      <ul>
+        <li><strong>Experience Replay</strong>, where past experiences are stored and randomly sampled during training.</li>
+        <li><strong>Target Networks</strong>, where a separate slowly updated network is used for computing targets.</li>
+      </ul>
+      <p>These simple but powerful ideas allowed Deep RL to scale to much more complex environments and eventually led to major breakthroughs in modern AI.</p>
+
+      <p>DQN became historically important after DeepMind showed that an agent could learn directly from raw game pixels and achieve human-level performance on several Atari games.</p>
+      <p>This was one of the first major demonstrations that deep neural networks and Reinforcement Learning could work together successfully.</p>
+      <p>Even though the core idea still comes from Bellman’s Equation and Q-Learning, replacing tables with neural networks allowed RL to move beyond small toy environments into large high-dimensional problems.</p>
+      <p>This breakthrough laid the foundation for much of modern Deep Reinforcement Learning.</p>
+      <p>You can refer to the actual paper: <a href="https://arxiv.org/pdf/1312.5602" target="_blank">https://arxiv.org/pdf/1312.5602</a> or refer to Deep Q-Networks Explained <a href="https://www.youtube.com/watch?v=x83WmvbRa2I" target="_blank">https://www.youtube.com/watch?v=x83WmvbRa2I</a>!</p>
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">Advanced DQNs: Rainbow DQN</h3>
+      <p>There were many advanced made in standard DQN for example:</p>
+      <ul>
+        <li><a href="https://arxiv.org/abs/1509.06461" target="_blank">Double-DQN</a></li>
+        <li><a href="https://arxiv.org/abs/1511.05952" target="_blank">Prioritized Experience Replay</a></li>
+        <li><a href="https://arxiv.org/abs/1511.06581" target="_blank">Duelling Networks</a></li>
+        <li><a href="https://arxiv.org/abs/1706.10295" target="_blank">Noisy Nets</a></li>
+        <li><a href="https://arxiv.org/abs/1707.06887" target="_blank">Distributional RL</a></li>
+        <li><a href="https://arxiv.org/abs/1602.01783" target="_blank">N-step Learning</a></li>
+      </ul>
+
+      <p>Combining these 3 we get <a href="https://arxiv.org/abs/1710.02298" target="_blank">Rainbow DQN</a>.</p>
+      <p>You may find the following blog interesting which covers all of these topics along with Q-Learning and DQN, written by one of our mentors Vishesh <a href="https://medium.com/@thevishesh16/q-learning-to-rainbow-dqn-the-complete-evolution-of-q-learning-complete-theory-with-8f25cfb31b01" target="_blank">https://medium.com/@thevishesh16/q-learning-to-rainbow-dqn-the-complete-evolution-of-q-learning-complete-theory-with-8f25cfb31b01</a></p>
+      <p>We would not expect that you'd be able to master all of these topics by the end of this week, but I would expect you to atleast learn DQN, DDQN and Prioritized Experience Replay and should be having a basic intuition of the others, you shoul atleast be able to tell their functionalities and the problems they are trying to solve.</p>
+    </div>
+
+    <h2>Assignment</h2>
+    <div class="assignment-block">
+      <p><a href="../assignments/week2.html" class="btn btn-primary" style="display:inline-block; margin-top:10px; color: #0d0d0f !important;">View Week 2 Assignment Details →</a></p>
     </div>
 
   </div>
@@ -70,7 +111,7 @@
     <p>
       <a href="week1.html">← Week 1</a> · 
       <a href="../index.html">Home</a> · 
-      <a href="week3.html">Week 3 →</a>
+      <!-- <a href="week3.html">Week 3 →</a> -->
     </p>
   </footer>
 

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 Assignment | Recall-E</title>
+  <meta name="description" content="Week 2 Assignment: Train a Double DQN agent with Prioritized Experience Replay on Atari Boxing.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#results">Results</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </nav>
+
+  <div class="week-hero">
+    <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
+    <div class="hero-badge"><span class="dot"></span> Week 2</div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);">
+      <span class="gradient">Week 2 Assignment</span>
+    </h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">
+      Train a Double DQN agent with Prioritized Experience Replay on Atari Boxing
+    </p>
+  </div>
+
+  <div class="week-content">
+    <h2>Assignment Instructions</h2>
+    <div class="assignment-block">
+      <p><strong>Submission:</strong> Make your own github repository(we reccommend you to collaborate using github) and push all the deliverables mentioned below.</p>
+      <p><strong>Team Size:</strong> 5 members per team. Divide the modules among yourselves.</p>
+
+      <h3>The Task</h3>
+      <p>Train an agent to play <strong>Atari Boxing</strong> (<code>ALE/Boxing-v5</code>) using a <strong>Double DQN</strong> with <strong>Prioritized Experience Replay</strong>.</p>
+      <p>We have provided a modular code skeleton below. Each file contains the class and function signatures you need to implement. Your job is to fill in the logic.</p>
+
+      <h3>Environment</h3>
+      <p>Use the Gymnasium Atari environment:</p>
+      <div class="code-block">
+        <pre>import gymnasium as gym
+import ale_py
+
+gym.register_envs(ale_py)
+env = gym.make("ALE/Boxing-v5")</pre>
+      </div>
+      <p>You will need to install <code>gymnasium[atari]</code> and <code>ale-py</code>. The observation space is raw pixel frames (210×160×3). You'll need to preprocess these into grayscale, resize, and stack frames.</p>
+
+      <h3>Code Structure</h3>
+      <p>We provide the following modular file structure. Each file has its classes and function signatures pre-defined with <code>pass</code>. Your task is to implement the body of each function.</p>
+
+      <div class="code-block">
+        <pre>week-2/
+├── env.py              # Environment wrappers and preprocessing
+├── network.py          # Neural network architecture (Dueling optional)
+├── replay_buffer.py    # Prioritized Experience Replay buffer
+├── agent.py            # Double DQN Agent (action selection, learning)
+├── train.py            # Training loop and logging
+├── evaluate.py         # Evaluation and rendering
+├── config.py           # All hyperparameters in one place
+└── README.md           # Your analysis and instructions</pre>
+      </div>
+
+      <h3>Module Breakdown</h3>
+      <ul>
+        <li><strong><code>config.py</code></strong> — Central config file. All hyperparameters (learning rate, batch size, gamma, epsilon schedule, PER alpha/beta, etc.) live here.</li>
+        <li><strong><code>env.py</code></strong> — Gymnasium wrappers to handle frame preprocessing: grayscale conversion, resizing to 84×84, frame stacking (4 frames), and reward clipping.</li>
+        <li><strong><code>network.py</code></strong> — The CNN architecture that takes stacked frames as input and outputs Q-values for all 18 actions.</li>
+        <li><strong><code>replay_buffer.py</code></strong> — The Prioritized Experience Replay buffer using a Sum Tree data structure for O(log n) sampling.</li>
+        <li><strong><code>agent.py</code></strong> — The Double DQN agent: epsilon-greedy action selection, target network updates, and the learning step using PER priorities.</li>
+        <li><strong><code>train.py</code></strong> — The main training loop: environment interaction, storing transitions, periodic learning, logging rewards, and saving checkpoints.</li>
+        <li><strong><code>evaluate.py</code></strong> — Load a trained model and run evaluation episodes. Optionally record video.</li>
+      </ul>
+
+      <h3>What to Submit</h3>
+      <ul>
+        <li>All completed Python files with working implementations.</li>
+        <li>Training plots: episode reward vs. episode number (smoothed).</li>
+        <li>A <code>README.md</code> with:
+          <ul>
+            <li>How to install dependencies and run training.</li>
+            <li>Training hyperparameters used.</li>
+            <li>Link your model weights uploaded on google drive(ofc you can not push large files on github).</li>
+            <li>Brief analysis on the performance of your agent.</li>
+            <li>Division of work among team members.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Hints</h3>
+      <ul>
+        <li>Start with <code>config.py</code> and <code>env.py</code> — get the environment running and rendering first.</li>
+        <li>Build and test <code>network.py</code> independently — make sure the forward pass shapes are correct.</li>
+        <li>Implement a simple uniform replay buffer first in <code>replay_buffer.py</code>, then upgrade to PER.</li>
+        <li>The Sum Tree is the trickiest part. Draw it out on paper before coding.</li>
+        <li>Use <code>torch.no_grad()</code> when computing target Q-values.</li>
+        <li>Sync the target network every few thousand steps, not every step.</li>
+      </ul>
+    </div>
+
+    <h2>Skeleton Code</h2>
+    <p>The complete skeleton files are available in the assignments repository. Below is a preview of each module's structure.</p>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">config.py</h3>
+    <div class="code-block">
+      <pre>"""
+Centralised hyperparameter configuration.
+All magic numbers live here so every other module
+can simply `from config import Config`.
+"""
+
+
+class Config:
+    # Environment
+    ENV_NAME        = "ALE/Boxing-v5"
+    FRAME_STACK     = 4
+    FRAME_SIZE      = 84
+
+    # Network
+    LEARNING_RATE   = 1e-4
+    BATCH_SIZE      = 32
+    GAMMA           = 0.99
+
+    # Epsilon schedule
+    EPS_START       = 1.0
+    EPS_END         = 0.01
+    EPS_DECAY_STEPS = 100_000
+
+    # Replay buffer
+    BUFFER_SIZE     = 100_000
+    PER_ALPHA       = 0.6
+    PER_BETA_START  = 0.4
+    PER_BETA_END    = 1.0
+    PER_BETA_STEPS  = 200_000
+    PER_EPSILON     = 1e-6
+
+    # Training
+    TARGET_UPDATE   = 1_000
+    TRAIN_START     = 10_000
+    TOTAL_STEPS     = 500_000
+    SAVE_EVERY      = 50_000
+    LOG_EVERY       = 1_000</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">env.py</h3>
+    <div class="code-block">
+      <pre>"""
+Environment wrappers for Atari preprocessing.
+Handles frame grayscale conversion, resizing,
+stacking, and reward clipping.
+"""
+
+import gymnasium as gym
+import ale_py
+import numpy as np
+
+gym.register_envs(ale_py)
+
+
+class FramePreprocessor:
+    """Converts a raw RGB frame to grayscale and resizes to (size, size)."""
+
+    def __init__(self, size=84):
+        self.size = size
+
+    def process(self, frame):
+        """
+        Args:
+            frame: np.ndarray of shape (210, 160, 3)
+        Returns:
+            np.ndarray of shape (size, size), dtype float32, values in [0, 1]
+        """
+        pass
+
+
+class FrameStacker:
+    """Maintains a stack of the last `n` preprocessed frames."""
+
+    def __init__(self, n_frames=4, frame_size=84):
+        self.n_frames = n_frames
+        self.frame_size = frame_size
+        self.frames = None
+
+    def reset(self, initial_frame):
+        """
+        Initialise the stack by repeating the first frame n times.
+        Args:
+            initial_frame: np.ndarray of shape (frame_size, frame_size)
+        Returns:
+            np.ndarray of shape (n_frames, frame_size, frame_size)
+        """
+        pass
+
+    def append(self, frame):
+        """
+        Push a new frame and drop the oldest.
+        Args:
+            frame: np.ndarray of shape (frame_size, frame_size)
+        Returns:
+            np.ndarray of shape (n_frames, frame_size, frame_size)
+        """
+        pass
+
+
+def make_env(env_name, frame_size=84, n_frames=4):
+    """
+    Create the Atari environment and return it alongside
+    a FramePreprocessor and FrameStacker.
+
+    Args:
+        env_name: str, Gymnasium environment ID
+        frame_size: int, target spatial dimension
+        n_frames: int, number of frames to stack
+    Returns:
+        env, preprocessor, stacker
+    """
+    pass</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">network.py</h3>
+    <div class="code-block">
+      <pre>"""
+Neural network architecture for the DQN agent.
+A standard CNN that takes stacked frames and outputs
+Q-values for each action.
+"""
+
+import torch
+import torch.nn as nn
+
+
+class QNetwork(nn.Module):
+    """
+    Convolutional Q-Network.
+
+    Input:  (batch, n_frames, 84, 84)
+    Output: (batch, n_actions)
+    """
+
+    def __init__(self, n_frames, n_actions):
+        """
+        Define the layers:
+          - 3 convolutional layers (with ReLU)
+          - 2 fully connected layers
+        Args:
+            n_frames: int, number of stacked frames (input channels)
+            n_actions: int, number of possible actions
+        """
+        super().__init__()
+        pass
+
+    def forward(self, x):
+        """
+        Forward pass.
+        Args:
+            x: torch.Tensor of shape (batch, n_frames, 84, 84)
+        Returns:
+            torch.Tensor of shape (batch, n_actions)
+        """
+        pass</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">replay_buffer.py</h3>
+    <div class="code-block">
+      <pre>"""
+Prioritized Experience Replay buffer using a Sum Tree.
+"""
+
+import numpy as np
+
+
+class SumTree:
+    """
+    Binary tree where each leaf stores a priority and
+    internal nodes store the sum of their children.
+    Allows O(log n) sampling proportional to priority.
+    """
+
+    def __init__(self, capacity):
+        """
+        Args:
+            capacity: int, max number of transitions
+        """
+        self.capacity = capacity
+        self.tree = np.zeros(2 * capacity - 1)
+        self.data = np.zeros(capacity, dtype=object)
+        self.write_index = 0
+        self.size = 0
+
+    def total(self):
+        """Return the total sum of all priorities."""
+        pass
+
+    def add(self, priority, data):
+        """
+        Store a transition with the given priority.
+        Args:
+            priority: float
+            data: tuple (state, action, reward, next_state, done)
+        """
+        pass
+
+    def update(self, tree_index, priority):
+        """
+        Update the priority of a leaf node and propagate.
+        Args:
+            tree_index: int, index in the tree array
+            priority: float, new priority
+        """
+        pass
+
+    def get(self, value):
+        """
+        Retrieve a leaf by sampling a value in [0, total()).
+        Args:
+            value: float
+        Returns:
+            (tree_index, priority, data)
+        """
+        pass
+
+
+class PrioritizedReplayBuffer:
+    """
+    Replay buffer that samples transitions proportional
+    to their TD-error priority.
+    """
+
+    def __init__(self, capacity, alpha=0.6, beta_start=0.4,
+                 beta_end=1.0, beta_steps=200_000, epsilon=1e-6):
+        """
+        Args:
+            capacity: int
+            alpha: float, how much prioritisation to use (0 = uniform)
+            beta_start: float, initial importance-sampling exponent
+            beta_end: float, final beta value
+            beta_steps: int, steps over which beta is annealed
+            epsilon: float, small constant to avoid zero priorities
+        """
+        self.tree = SumTree(capacity)
+        self.alpha = alpha
+        self.beta_start = beta_start
+        self.beta_end = beta_end
+        self.beta_steps = beta_steps
+        self.epsilon = epsilon
+        self.max_priority = 1.0
+        self.step_count = 0
+
+    def _get_beta(self):
+        """Linearly anneal beta from beta_start to beta_end."""
+        pass
+
+    def store(self, state, action, reward, next_state, done):
+        """
+        Store a transition with max priority.
+        Args:
+            state:      np.ndarray
+            action:     int
+            reward:     float
+            next_state: np.ndarray
+            done:       bool
+        """
+        pass
+
+    def sample(self, batch_size):
+        """
+        Sample a batch proportional to priorities.
+        Args:
+            batch_size: int
+        Returns:
+            (states, actions, rewards, next_states, dones,
+             indices, is_weights)
+        """
+        pass
+
+    def update_priorities(self, indices, td_errors):
+        """
+        Update priorities after learning.
+        Args:
+            indices:   list of tree indices
+            td_errors: np.ndarray of |TD error| values
+        """
+        pass
+
+    def __len__(self):
+        return self.tree.size</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">agent.py</h3>
+    <div class="code-block">
+      <pre>"""
+Double DQN Agent with Prioritized Experience Replay.
+"""
+
+import numpy as np
+import torch
+import torch.optim as optim
+
+from network import QNetwork
+from replay_buffer import PrioritizedReplayBuffer
+
+
+class DoubleDQNAgent:
+    """
+    Encapsulates:
+      - online and target Q-networks
+      - epsilon-greedy action selection
+      - Double DQN learning step
+      - target network syncing
+    """
+
+    def __init__(self, n_frames, n_actions, config, device="cpu"):
+        """
+        Args:
+            n_frames:  int, number of stacked frames
+            n_actions: int, number of possible actions
+            config:    Config object with hyperparameters
+            device:    str, "cpu" or "cuda"
+        """
+        self.n_actions = n_actions
+        self.config = config
+        self.device = device
+        self.step_count = 0
+
+        # Networks
+        self.online_net = QNetwork(n_frames, n_actions).to(device)
+        self.target_net = QNetwork(n_frames, n_actions).to(device)
+        self.sync_target()
+
+        # Optimiser
+        self.optimiser = optim.Adam(
+            self.online_net.parameters(), lr=config.LEARNING_RATE
+        )
+
+        # Replay buffer
+        self.buffer = PrioritizedReplayBuffer(
+            capacity=config.BUFFER_SIZE,
+            alpha=config.PER_ALPHA,
+            beta_start=config.PER_BETA_START,
+            beta_end=config.PER_BETA_END,
+            beta_steps=config.PER_BETA_STEPS,
+            epsilon=config.PER_EPSILON,
+        )
+
+    def sync_target(self):
+        """Copy online network weights to target network."""
+        pass
+
+    def get_epsilon(self):
+        """
+        Compute current epsilon from the linear decay schedule.
+        Returns:
+            float
+        """
+        pass
+
+    def select_action(self, state):
+        """
+        Epsilon-greedy action selection.
+        Args:
+            state: np.ndarray of shape (n_frames, 84, 84)
+        Returns:
+            int, chosen action
+        """
+        pass
+
+    def store_transition(self, state, action, reward, next_state, done):
+        """Push a transition into the PER buffer."""
+        pass
+
+    def learn(self):
+        """
+        Sample a prioritised batch, compute Double DQN targets,
+        update the network, and update PER priorities.
+
+        Double DQN target:
+            a* = argmax_a Q_online(s', a)
+            y  = r + gamma * Q_target(s', a*) * (1 - done)
+
+        Returns:
+            float, mean loss (for logging), or None if not enough samples
+        """
+        pass
+
+    def save(self, path):
+        """Save model weights to disk."""
+        pass
+
+    def load(self, path):
+        """Load model weights from disk."""
+        pass</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">train.py</h3>
+    <div class="code-block">
+      <pre>"""
+Main training loop.
+Handles environment interaction, agent learning,
+logging, and checkpoint saving.
+"""
+
+import numpy as np
+from config import Config
+from env import make_env
+from agent import DoubleDQNAgent
+
+
+def train():
+    """
+    Run the full training loop:
+      1. Create environment and agent.
+      2. For each step:
+         a. Select action (epsilon-greedy).
+         b. Step environment.
+         c. Store transition.
+         d. Call agent.learn() if enough samples.
+         e. Sync target network periodically.
+         f. Log episode rewards.
+         g. Save checkpoints.
+    """
+    config = Config()
+
+    # ----- setup -----
+    env, preprocessor, stacker = make_env(
+        config.ENV_NAME, config.FRAME_SIZE, config.FRAME_STACK
+    )
+    n_actions = env.action_space.n
+    device = "cuda" if __import__("torch").cuda.is_available() else "cpu"
+
+    agent = DoubleDQNAgent(
+        n_frames=config.FRAME_STACK,
+        n_actions=n_actions,
+        config=config,
+        device=device,
+    )
+
+    # ----- metrics -----
+    episode_rewards = []
+    episode_reward = 0.0
+    episode_count = 0
+    losses = []
+
+    # ----- initial reset -----
+    obs, info = env.reset()
+    state = stacker.reset(preprocessor.process(obs))
+
+    # ----- training loop -----
+    for step in range(1, config.TOTAL_STEPS + 1):
+        pass  # implement the training loop body here
+
+    env.close()
+    return episode_rewards
+
+
+if __name__ == "__main__":
+    rewards = train()</pre>
+    </div>
+
+    <h3 style="color: var(--accent-orange); margin-top: 24px;">evaluate.py</h3>
+    <div class="code-block">
+      <pre>"""
+Evaluation script.
+Loads a trained model and runs episodes to measure performance.
+Optionally records video.
+"""
+
+import numpy as np
+import torch
+from config import Config
+from env import make_env
+from agent import DoubleDQNAgent
+
+
+def evaluate(model_path, n_episodes=10, render=False, record=False):
+    """
+    Load a trained agent and run evaluation episodes.
+
+    Args:
+        model_path:  str, path to saved model weights
+        n_episodes:  int, number of evaluation episodes
+        render:      bool, whether to render the environment
+        record:      bool, whether to record video
+    Returns:
+        list of episode rewards
+    """
+    pass
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", type=str, required=True)
+    parser.add_argument("--episodes", type=int, default=10)
+    parser.add_argument("--render", action="store_true")
+    parser.add_argument("--record", action="store_true")
+    args = parser.parse_args()
+
+    rewards = evaluate(args.model, args.episodes, args.render, args.record)
+    print(f"Mean reward over {len(rewards)} episodes: {np.mean(rewards):.2f}")
+    print(f"Std: {np.std(rewards):.2f}")</pre>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a> · 
+      <a href="../weeks/week2.html">Week 2 Resources →</a>
+    </p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
