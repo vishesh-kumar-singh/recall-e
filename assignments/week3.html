@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 Assignment | Recall-E</title>
+  <meta name="description" content="Week 3 Assignment: Train a PPO agent for the Continual Bench.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#results">Results</a></li>
+      <li><a href="../index.html#videos">Eval Videos</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </nav>
+
+  <div class="week-hero">
+    <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
+    <div class="hero-badge"><span class="dot"></span> Week 3</div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);">
+      <span class="gradient">Week 3 Assignment</span>
+    </h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">
+      Train a PPO Agent for the Continual Bench
+    </p>
+  </div>
+
+  <div class="week-content">
+    <h2>Assignment Instructions</h2>
+    <div class="assignment-block">
+      <h3>The Task</h3>
+      <p>Train the arm for any one selected task in the <strong>Continual-Bench</strong> environment using PPO.</p>
+      
+      <h3>Setup</h3>
+      <p>Please download the assignment skeleton below, which contains the environment. Please don't try to use original continual bench repo, because there were missing texture files and we have also modified reward function to be more dense to aid learning.</p>
+      <p>One member from each team, download the zip and create a repository from this zip file, and give collaborator access to other members of your team. You guys may divide work amongst yourself, as well as once main part is done, your team each can try out different hyperparameters, reward functions etc. to improve the results.</p>
+      <p>Code skeleton is also provided so you could part be part understand the need of each function and get an idea of what is happening under the hood. It is advised to thoroughly go through the code and understand it.</p>
+      <p>
+        <a href="assignment_skeleton.zip" class="btn btn-primary" style="display:inline-block; margin-top:10px; color: #0d0d0f !important;" download>Download Assignment Skeleton</a>
+      </p>
+      <h3>Catastrphic Forgetting</h3>
+      <p>Once you are done with training ppo, now you will try to show catastrophic forgetting. In order to do this, 
+        first you will train the agent for first few epochs on say door task. When you see a good performance in that, switch to a new task, say widow task and train the same Network over the new task.
+        After this you will observe that the performance on door task has dropped significantly!!
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a> · 
+      <a href="../weeks/week3.html">Week 3 Resources →</a>
+    </p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

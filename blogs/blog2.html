@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 Blog | Recall-E</title>
+  <meta name="description" content="A brief summary of the blog post.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Additional styles specific for blog reading experience */
+    .blog-header {
+      padding: 120px 48px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      color: var(--text-secondary);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .blog-meta .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bg-primary);
+    }
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+    .blog-content h2 {
+      color: var(--accent-orange);
+      margin: 48px 0 24px;
+      font-size: 1.8rem;
+    }
+    .blog-content h3 {
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      font-size: 1.4rem;
+    }
+    .blog-content p {
+      margin-bottom: 24px;
+    }
+    .blog-content img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      margin: 32px 0;
+      border: 1px solid var(--border-color);
+    }
+    .blog-content .image-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: -24px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .blog-content blockquote {
+      border-left: 4px solid var(--accent-orange);
+      padding-left: 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: rgba(232, 135, 58, 0.05);
+      padding: 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .blog-content .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      margin: 32px 0;
+      overflow-x: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+    }
+  </style>
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#blogs">Blogs</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </nav>
+
+  <div class="blog-header">
+    <a href="../index.html#blogs" class="back-link" style="display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; margin-bottom:24px; transition:0.3s;">← Back to All Blogs</a>
+    <div class="hero-badge" style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(232,135,58,0.1); border:1px solid rgba(232,135,58,0.3); border-radius:50px; font-size:0.85rem; color:var(--accent-orange); margin-bottom:24px; font-family:'Space Mono',monospace;">
+      <span class="dot" style="width:8px; height:8px; background:var(--accent-orange); border-radius:50%; animation: pulse 2s infinite;"></span>
+      Week 2 Blog
+    </div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:16px;">
+      <span class="gradient" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber), var(--accent-blue)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">Week 2 Blog</span>
+    </h1>
+    
+    <div class="blog-meta">
+      <div style="display:flex; margin-right:8px;">
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); z-index: 4; font-size: 0.8rem;">PA</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 3; font-size: 0.8rem;">PC</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 2; font-size: 0.8rem;">HS</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 1; font-size: 0.8rem;">HG</div>
+      </div>
+      <div>
+        <div style="color: var(--text-primary); font-weight: 700;">Prakhar Agarwal, Priyanka Chadokar, Harpal Singh, Hemendra Gurjar</div>
+        <div>Date: June 08, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <article class="blog-content">
+<h2>Introduction</h2>
+<p>In this blog, we will unpack the core components of modern value-based Reinforcement Learning (RL), tracing how a series of incremental breakthroughs led to state-of-the-art performance. We will cover:</p>
+<ol>
+<li><strong>Deep Q-Network (DQN):</strong> The foundational algorithm that bridged the gap between classic Q-learning and deep neural networks.</li>
+<li><strong>Double DQN (DDQN):</strong> The mathematical correction for standard DQN's inherent tendency to overestimate action values.</li>
+<li><strong>Prioritized Experience Replay (PER):</strong> An optimization for DQN and DDQN that samples transitions based on their learning value, making training significantly more sample-efficient.</li>
+</ol>
+<p>We will also briefly explore the mechanics of <strong>Dueling Networks</strong>, <strong>Noisy Nets</strong>, <strong>Distributional RL</strong>, and <strong>N-step Learning</strong>, before concluding with a bird's-eye view of <strong>Rainbow DQN</strong>—the ultimate architecture that unites all of these pieces into a single, powerhouse agent.</p>
+<h2>Deep Q-Network (DQN)</h2>
+<p>In the case of a continuous state, it is computationally extremely heavy to even store a Q-value for every possible state and action, let alone try to train an agent on this Q-Table.</p>
+<h3>How do we tackle this problem?</h3>
+<p>The answer lies in a very fundamental and famous concept of Machine Learning: <strong>Neural Networks</strong>.</p>
+<p>Using a neural network, we can input the state as a continuous choice of numbers and receive a particular value for every possible action $a \in A$. This value corresponds to the action-value function. The neural network is said to have weights $\theta$, and this neural network is called a <strong>Q-Network</strong>.</p>
+<p>Thus, we redefine learning as training the Q-Network (modifying the weights $\theta$) in a similar—but not identical—manner to neural networks in supervised learning.</p>
+<h3>Defining a Loss Function</h3>
+<p>A Q-network can be trained by minimizing a sequence of loss functions $L_i(\theta_i)$ that changes at each iteration $i$:</p>
+<p>$$L_i(\theta_i) = \mathbb{E}<em>{(s,a,r,s') \sim U(D)} \left[ \left( r + \gamma \max</em>{a'} Q(s', a'; \theta_i^-) - Q(s, a; \theta_i) \right)^2 \right]$$</p>
+<blockquote>
+<p><strong>Important Note:</strong> Note that the targets depend on the network weights; this is in contrast with the targets used for supervised learning, which are fixed before learning begins. We also use the <strong>Exploration vs. Exploitation</strong> logic while choosing the action when in state $s$.</p>
+</blockquote>
+<p>Note that this algorithm is <strong>model-free</strong>: it solves the reinforcement learning task directly using samples from the emulator $E$, without explicitly constructing an estimate of $E$.</p>
+<h3>Experience Replay</h3>
+<p>We utilize a technique known as <strong>experience replay</strong> where we store the agent’s experiences at each time-step, $e_t = (s_t, a_t, r_t, s_{t+1})$, in a dataset $\mathcal{D} = {e_1, \dots, e_N}$, pooled over many episodes into a replay memory.</p>
+<p>Before performing experience replay, the agent selects and executes an action according to an $\varepsilon$-greedy policy. Since using histories of arbitrary length as inputs to a neural network can be difficult, our Q-function instead works on a fixed-length representation of histories produced by a function $\phi$.</p>
+<p>During the inner loop of the algorithm, we apply Q-learning updates, or minibatch updates, to samples of experience, $e \sim \mathcal{D}$, drawn at random from the pool of stored samples.</p>
+<h3>Preprocessing</h3>
+<p>To convert our observation into input for our Q-network, we need to observe our state and make appropriate changes to suit our requirement of the model architecture. We will not get into the details of how this is done as it varies from environment to environment.</p>
+<h3>Algorithm 1: Deep Q-learning with Experience Replay</h3>
+<hr />
+<ol>
+<li><strong>Initialize</strong> replay memory $\mathcal{D}$ to capacity $N$</li>
+<li><strong>Initialize</strong> action-value function $Q$ with random weights $\theta$</li>
+<li><strong>for</strong> $\text{episode} = 1, M$ <strong>do</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;Initialize sequence $s_1 = {x_1}$ and preprocessed sequence $\phi_1 = \phi(s_1)$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>for</strong> $t = 1, T$ <strong>do</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With probability $\varepsilon$ select a random action $a_t$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise select $a_t = \arg\max_a Q(\phi(s_t), a; \theta)$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Execute action $a_t$ in emulator and observe reward $r_t$ and image $x_{t+1}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set $s_{t+1} = s_t, a_t, x_{t+1}$ and preprocess $\phi_{t+1} = \phi(s_{t+1})$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store transition $(\phi_t, a_t, r_t, \phi_{t+1})$ in $\mathcal{D}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample random minibatch of transitions $(\phi_j, a_j, r_j, \phi_{j+1})$ from $\mathcal{D}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set $y_j = \begin{cases} r_j &amp; \text{for terminal } \phi_{j+1} \ r_j + \gamma \max_{a'} Q(\phi_{j+1}, a'; \theta^-) &amp; \text{for non-terminal } \phi_{j+1} \end{cases}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform a gradient descent step on $\left(y_j - Q(\phi_j, a_j; \theta)\right)^2$ with respect to the network parameters $\theta$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>end for</strong></li>
+<li><strong>end for</strong></li>
+</ol>
+<hr />
+<h2>The Code</h2>
+<h3>1) The Q-Network Architecture</h3>
+<blockquote>
+<p><strong>Note:</strong> Do not worry too much about this right now as it changes from situation to situation; this is provided just for illustration purposes.</p>
+</blockquote>
+<div class="code-block"><pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class QNetwork(nn.Module):
+    def __init__(self, state_dim, action_dim):
+        super(QNetwork, self).__init__()
+        # A simple network structure for vector states
+        self.fc1 = nn.Linear(state_dim, 64)
+        self.fc2 = nn.Linear(64, 64)
+        self.fc3 = nn.Linear(64, action_dim)
+
+    def forward(self, state):
+        # Feed forward pass to get Q-values for all actions
+        x = F.relu(self.fc1(state))
+        x = F.relu(self.fc2(x))
+        q_values = self.fc3(x)
+        return q_values
+</code></pre></div>
+<h3>2) The Randomized Experience Buffer</h3>
+<blockquote>
+<p><strong>Note:</strong> This is the formal code implementation for the Experience Replay Buffer algorithm described earlier.</p>
+</blockquote>
+<div class="code-block"><pre><code class="language-python">import random
+from collections import deque
+
+class ReplayMemory:
+    def __init__(self, capacity):
+        # Initialize replay memory D to capacity N
+        self.memory = deque(maxlen=capacity)
+
+    def push(self, state, action, reward, next_state, done):
+        # Store transition (phi_t, a_t, r_t, phi_t+1, done) in D
+        self.memory.append((state, action, reward, next_state, done))
+
+    def sample(self, batch_size):
+        # Sample random minibatch of transitions from D
+        return random.sample(self.memory, batch_size)
+
+    def __len__(self):
+        return len(self.memory)
+</code></pre></div>
+<h3>3) The DQN Algorithm and Training Loop</h3>
+<blockquote>
+<p><strong>Note:</strong> This is the heart of the DQN algorithm and should be well understood.</p>
+</blockquote>
+<div class="code-block"><pre><code class="language-python">import numpy as np
+import torch.optim as optim
+import random
+import torch
+import torch.nn.functional as F
+
+# --- Hyperparameters &amp; Initialization ---
+state_dim = 4      # Example state dimension
+action_dim = 2     # Example action dimension
+N = 10000          # Replay memory capacity
+M = 500            # Number of episodes
+T = 200            # Max steps per episode
+batch_size = 32
+gamma = 0.99       # Discount factor
+epsilon = 0.1      # Exploration rate (fixed for simplicity)
+
+# Initialize replay memory D to capacity N
+D = ReplayMemory(N)
+
+# Initialize action-value function Q with random weights
+Q = QNetwork(state_dim, action_dim)
+optimizer = optim.Adam(Q.parameters(), lr=1e-3)
+
+# Dummy environment function placeholders
+def preprocess(state): return torch.FloatTensor(state)
+def select_random_action(): return random.randint(0, action_dim - 1)
+def env_step(action): return np.random.rand(state_dim), random.random(), random.choice([True, False])
+def env_reset(): return np.random.rand(state_dim)
+
+# --- Main Training Loop ---
+for episode in range(1, M + 1):
+    raw_state = env_reset()
+    phi = preprocess(raw_state)
+
+    for t in range(1, T + 1):
+        # Action selection (Epsilon-greedy)
+        if random.random() &lt; epsilon:
+            action = select_random_action()
+        else:
+            with torch.no_grad():
+                q_values = Q(phi)
+                action = torch.argmax(q_values).item()
+
+        # Execute action in emulator and observe reward and next state
+        next_raw_state, reward, done = env_step(action)
+        phi_next = preprocess(next_raw_state)
+
+        # Store transition in D
+        D.push(phi, action, reward, phi_next, done)
+
+        # Move to next state
+        phi = phi_next
+
+        # Start training only if we have enough samples
+        if len(D) &lt; batch_size:
+            if done: break
+            continue
+
+        # Sample random minibatch of transitions from D
+        minibatch = D.sample(batch_size)
+
+        states = torch.stack([b[0] for b in minibatch])
+        actions = torch.LongTensor([b[1] for b in minibatch]).unsqueeze(1)
+        rewards = torch.FloatTensor([b[2] for b in minibatch])
+        next_states = torch.stack([b[3] for b in minibatch])
+        dones = torch.FloatTensor([b[4] for b in minibatch])
+
+        # Compute Q(phi_j, a_j; theta)
+        current_q_values = Q(states).gather(1, actions).squeeze(1)
+
+        # Compute targets y_j
+        with torch.no_grad():
+            max_next_q_values = Q(next_states).max(1)[0]
+            targets = rewards + (1 - dones) * gamma * max_next_q_values
+
+        # Perform a gradient descent step
+        loss = F.mse_loss(current_q_values, targets)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if done:
+            break
+</code></pre></div>
+<h2>The Fatal Flaws: Why We Need Double DQN (DDQN)</h2>
+<p>There are two main reasons:</p>
+<h3>1. Moving Targets (Chasing Your Own Tail)</h3>
+<p>Remember the important note: we are using the exact same network weights to calculate both our prediction and our target. Because the target shifts every time the weights update, it is like a dog chasing its own tail—a dynamic that leads to massive training instability and divergence in non-linear function approximators.</p>
+<h3>2. Overestimation Bias (The "Hard Max" Problem)</h3>
+<p>Because our neural network is just estimating values, those estimates are noisy. Some estimates will be slightly too low, and some will be slightly too high. By taking the hard max ($\max_a$) over all possible actions, standard DQN systematically favors the positively biased estimates. It blindly assumes the highest estimated value is the true maximum value.</p>
+<p>Because DQN bootstraps using its own overestimations to update previous states, this positive bias snowballs out of control. The network starts hallucinating that certain bad actions are actually fantastic, leading to catastrophic drops in performance. Standard DQN simply could not decouple <strong>selecting</strong> the best action from <strong>evaluating</strong> the worth of that action.</p>
+<h2>Double Deep Q-Network (DDQN)</h2>
+<h3>The Original DDQN</h3>
+<p>What we usually study and are going to discuss more about is an easy-to-implement version of DDQN, but the general DDQN is actually given by (van Hasselt, 2010).</p>
+<p>In the original Double Q-learning algorithm, two value functions are learned by assigning each experience randomly to update one of the two value functions, such that there are two sets of weights, $\theta$ and $\theta'$. For each update, one set of weights is used to determine the greedy policy and the other to determine its value. The Double Q-learning estimate can then be written as:</p>
+<p>$$Y_t^{DoubleQ} \equiv R_{t+1} + \gamma Q(S_{t+1}, \arg\max_a Q(S_{t+1}, a; \theta_t); \theta_t')$$</p>
+<p>Notice that the selection of the action, in the $\arg\max$, is still due to the online weights $\theta_t$. This means that, as in Q-learning, we are still estimating the value of the greedy policy according to the current values, as defined by $\theta_t$.</p>
+<p>However, we use the second set of weights $\theta'_t$ to fairly evaluate the value of this policy. This second set of weights can be updated symmetrically by switching the roles of $\theta$ and $\theta'$.</p>
+<h3>The DDQN We Will Use</h3>
+<p>Instead of separately maintaining two completely independent weight vectors, we will use the online network weights $\theta$ and a target network with weights $\theta^-$. This is how we will proceed to decouple action selection from action evaluation.</p>
+<h4>1. Action Selection</h4>
+<p>We ask our current, active <strong>Online Network</strong> ($\theta$) to pick the action it thinks is best for the next state:</p>
+<p>$$a^* = \arg\max_a Q(S_{t+1}, a; \theta_t)$$</p>
+<h4>2. Action Evaluation</h4>
+<p>Instead of blindly trusting the online network's valuation of $a^<em>$, we pass this chosen action to the </em><em>Target Network</em>* ($\theta^-$) to get its objective value:</p>
+<p>$$Q(S_{t+1}, a^*; \theta_t^-)$$</p>
+<h4>3. The Double DQN Target Formula</h4>
+<p>When we merge these two steps into our loss function, our new TD target becomes:</p>
+<p>$$Y_t^{DoubleDQN} \equiv R_{t+1} + \gamma Q(S_{t+1}, \arg\max_a Q(S_{t+1}, a; \theta_t); \theta_t^-)$$</p>
+<h4>4. Loss Minimization &amp; Target Updates</h4>
+<p>Using this target, we find the Mean Squared Error (MSE) just as we did before, and <strong>only update the online network</strong> $\theta$.</p>
+<p>It is only after a fixed number of iterations that we synchronize the networks by copying the weights of the online network ($\theta$) over to the target network ($\theta^-$).</p>
+<p>Because the weights of $\theta$ and $\theta^-$ are distinct, a random positive noise spike for an action in the online network is highly unlikely to match a positive noise spike for that same action in the target network. The overestimation bias effectively vanishes. As we are not using the same weights to determine both the greedy policy and its value, the agent is also no longer "chasing its own tail".</p>
+<blockquote>
+<p><strong>Note:</strong> The code for DDQN requires only minor additions and changes to the standard DQN implementation (specifically tracking and updating the target network), so it is not discussed separately here.</p>
+</blockquote>
+<h2>Prioritized Experience Replay (PER)</h2>
+<p>We have already seen experience replay. Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. In prior work, experience transitions were uniformly sampled from a replay memory. However, this approach simply replays transitions at the same frequency that they were originally experienced, regardless of their significance.</p>
+<p>The real addition of value comes when we develop a framework for prioritizing experience, so as to replay important transitions more frequently, and therefore learn more efficiently.</p>
+<p>Before considering Prioritized Experience Replay, let’s consider what happens if we don’t even consider experience replay (i.e., discarding incoming data immediately).</p>
+<h3>1. Strongly Correlated Updates</h3>
+<p>Discarding data immediately forces the agent to learn only from its most recent actions. This results in strongly correlated updates that break the <strong>i.i.d. assumption</strong> (Independent and Identically Distributed) foundational to many popular stochastic gradient-based algorithms.</p>
+<h3>2. Rapid Forgetting of Rare Experiences</h3>
+<p>Without a storage mechanism, the agent suffers from the rapid forgetting of possibly rare experiences that would be incredibly useful later on. If a critical or rare reward state is only visited once every few thousand steps, the network will quickly overwrite what it learned from that encounter during subsequent, mundane steps.</p>
+<h3>Benefits of Standard Experience Replay</h3>
+<p>Even without considering prioritization, introducing a standard, uniform experience replay buffer provides massive architectural benefits:</p>
+<p>In general, experience replay can reduce the amount of experience required to learn, and replace it with more computation and more memory—which are often cheaper resources than the RL agent’s interactions with its physical or simulated environment.</p>
+<p>We discuss how prioritizing some transitions which are replayed can make experience replay more efficient and effective than if all transitions are replayed uniformly. The key idea is that an RL agent can learn more effectively from some transitions than from others.</p>
+<h3>Which Transitions to Prioritize?</h3>
+<p>The central component of prioritized replay is the criterion by which the importance of each transition is measured. Not all experiences are created equal; some contain vital lessons, while others are repetitive or uninformative.</p>
+<p>Here are some possible criteria we can use to measure transition importance:</p>
+<h4>1. Expected Learning Progress (The Ideal Criterion)</h4>
+<p>One idealized criterion would be the amount the RL agent can learn from a transition in its current state (<strong>expected learning progress</strong>).</p>
+<h4>2. TD Error (The Practical Proxy)</h4>
+<p>While the ideal measure is not directly accessible, a reasonable proxy is the <strong>magnitude of a transition’s TD error ($|\delta|$)</strong>. This algorithm stores the last encountered TD error along with each transition in the replay memory. The transition with the largest absolute TD error ($|\delta|$) is replayed from the memory. A Q-learning update is applied to this transition, which updates the weights in proportion to the TD error.</p>
+<blockquote>
+<p><strong>The Catch:</strong> The TD error can be a poor estimate in some circumstances as well, such as when environment transitions or rewards are highly noisy.</p>
+</blockquote>
+<h3>Problems with Pure TD Error Prioritization</h3>
+<h4>1. Stale TD Errors &amp; Starvation</h4>
+<p>To avoid expensive, computationally heavy sweeps over the entire replay memory pool, TD errors are only updated for the specific transitions that are actively replayed.</p>
+<p>One major consequence of this is that transitions having a low TD error on their very first visit may <strong>never or rarely be replayed again</strong>, keeping their recorded error permanently low even if the evolving neural network could now learn a massive amount from them.</p>
+<h4>2. High Sensitivity to Noise</h4>
+<p>Pure TD error prioritization is exceptionally sensitive to noise spikes. If an environment has stochastic transitions or noisy rewards, a transition might yield a massive TD error purely due to randomness rather than actual structural patterns. The agent will end up hyper-focusing on these uninformative, noisy anomalies.</p>
+<p>We overcome some errors from TD error sampling by introducing Stochastic prioritization. This is a hybrid of TD error sampling and uniform random sampling. We ensure that the probability of being sampled is monotonic in a transition’s priority, while guaranteeing a non-zero probability even for the lowest-priority transition.</p>
+<p>Probability of sampling transition $i$ as:</p>
+<p>$$P(i) = \frac{p_i^\alpha}{\sum_k p_k^\alpha}$$</p>
+<p>Depending on how we choose $p_i$ we can categorize this in many more categories. Two famous ones are:</p>
+<h4>Direct, proportional prioritization</h4>
+<p>where $p_i = |\delta_i| + \epsilon$, where $\delta$ is the TD error.</p>
+<h4>Indirect, rank-based prioritization</h4>
+<p>where $p_i = \frac{1}{\text{rank}(i)}$</p>
+<p>Implementation of proportional variants is different, and also admits an efficient implementation based on a ‘sum-tree’ data structure (where every node is the sum of its children, with the priorities as the leaf nodes), which can be efficiently updated and sampled from.</p>
+<h3>Algorithm: Double DQN with Proportional Prioritization</h3>
+<ol>
+<li><strong>Input:</strong> minibatch $k$, step-size $\eta$, replay period $K$ and size $N$, exponents $\alpha$ and $\beta$, budget $T$.</li>
+<li><strong>Initialize</strong> replay memory $\mathcal{H} = \emptyset$, $\Delta = 0$, $p_1 = 1$</li>
+<li><strong>Observe</strong> $S_0$ and choose $A_0 \sim \pi_\theta(S_0)$</li>
+<li><strong>for</strong> $t = 1$ <strong>to</strong> $T$ <strong>do</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Observe</strong> $S_t$, $R_t$, $\gamma_t$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Store</strong> transition $(S_{t-1}, A_{t-1}, R_t, \gamma_t, S_t)$ in $\mathcal{H}$ with maximal priority $p_t = \max_{i &lt; t} p_i$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>if</strong> $t \equiv 0 \pmod K$ <strong>then</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>for</strong> $j = 1$ <strong>to</strong> $k$ <strong>do</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Sample</strong> transition $j \sim P(j) = \frac{p_j^\alpha}{\sum_i p_i^\alpha}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Compute</strong> importance-sampling weight $w_j = \frac{(N \cdot P(j))^{-\beta}}{\max_i w_i}$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Compute</strong> TD-error $\delta_j = R_j + \gamma_j Q_{\text{target}}\left(S_j, \arg\max_a Q(S_j, a)\right) - Q(S_{t-1}, A_{t-1})$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Update</strong> transition priority $p_j \leftarrow |\delta_j|$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Accumulate</strong> weight-change $\Delta \leftarrow \Delta + w_j \cdot \delta_j \cdot \nabla_\theta Q(S_{t-1}, A_{t-1})$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>end for</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Update</strong> weights $\theta \leftarrow \theta + \eta \cdot \Delta$, reset $\Delta = 0$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From time to time copy weights into target network $\theta_{\text{target}} \leftarrow \theta$</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>end if</strong></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Choose</strong> action $A_t \sim \pi_\theta(S_t)$</li>
+<li><strong>end for</strong></li>
+</ol>
+<p>Let’s not get in too much detail but line 10 corresponds to a concept called <strong>“annealing the bias”</strong>.</p>
+<h3>Code for PER with Proportional Prioritization</h3>
+<p>The code below is a template to adapt the above logic into code.</p>
+<div class="code-block"><pre><code class="language-python">import numpy as np
+
+class SumTree:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        # tree[0] is root; leaves occupy indices [capacity-1, 2*capacity-2]
+        self.tree = np.zeros(2 * capacity - 1)
+        self.data = np.zeros(capacity, dtype=object)
+        self.write_index = 0
+        self.size = 0
+
+    def total(self):
+        &quot;&quot;&quot;Return the total sum of all priorities.&quot;&quot;&quot;
+        return self.tree[0]
+
+    def add(self, priority, data):
+        &quot;&quot;&quot;Store a transition with the given priority.&quot;&quot;&quot;
+        leaf_index = self.write_index + self.capacity - 1
+        self.data[self.write_index] = data
+        self.update(leaf_index, priority)
+        self.write_index = (self.write_index + 1) % self.capacity
+        self.size = min(self.size + 1, self.capacity)
+
+    def update(self, tree_index, priority):
+        &quot;&quot;&quot;Update the priority of a leaf node and propagate.&quot;&quot;&quot;
+        delta = priority - self.tree[tree_index]
+        self.tree[tree_index] = priority
+        while tree_index != 0:
+            tree_index = (tree_index - 1) // 2
+            self.tree[tree_index] += delta
+
+    def get(self, value):
+        &quot;&quot;&quot;Retrieve a leaf by sampling a value in [0, total()).&quot;&quot;&quot;
+        index = 0
+        while index &lt; self.capacity - 1:
+            left = 2 * index + 1
+            right = left + 1
+            if value &lt;= self.tree[left]:
+                index = left
+            else:
+                value -= self.tree[left]
+                index = right
+        data_index = index - (self.capacity - 1)
+        return index, self.tree[index], self.data[data_index]
+
+class PrioritizedReplayBuffer:
+    &quot;&quot;&quot;Replay buffer that samples transitions proportional to their TD-error priority.&quot;&quot;&quot;
+    def __init__(self, capacity, alpha=0.6, beta_start=0.4, beta_end=1.0, beta_steps=200_000, epsilon=1e-6):
+        self.tree = SumTree(capacity)
+        self.alpha = alpha
+        self.beta_start = beta_start
+        self.beta_end = beta_end
+        self.beta_steps = beta_steps
+        self.epsilon = epsilon
+        self.max_priority = 1.0
+        self.step_count = 0
+
+    def _get_beta(self):
+        &quot;&quot;&quot;Linearly anneal beta from beta_start to beta_end.&quot;&quot;&quot;
+        fraction = min(self.step_count / self.beta_steps, 1.0)
+        return self.beta_start + fraction * (self.beta_end - self.beta_start)
+
+    def store(self, state, action, reward, next_state, done):
+        &quot;&quot;&quot;Store a transition with max priority.&quot;&quot;&quot;
+        priority = self.max_priority ** self.alpha
+        self.tree.add(priority, (state, action, reward, next_state, done))
+
+    def sample(self, batch_size):
+        &quot;&quot;&quot;Sample a batch proportional to priorities.&quot;&quot;&quot;
+        indices = []
+        priorities = []
+        transitions = []
+        segment = self.tree.total() / batch_size
+        beta = self._get_beta()
+        self.step_count += 1
+
+        for i in range(batch_size):
+            low, high = segment * i, segment * (i + 1)
+            value = np.random.uniform(low, high)
+            tree_idx, priority, data = self.tree.get(value)
+            indices.append(tree_idx)
+            priorities.append(priority)
+            transitions.append(data)
+
+        # Importance-sampling weights to correct for sampling bias
+        priorities = np.array(priorities, dtype=np.float32)
+        sampling_probs = priorities / self.tree.total()
+        is_weights = (self.tree.size * sampling_probs) ** (-beta)
+        is_weights /= is_weights.max() # normalise so max weight = 1
+
+        states, actions, rewards, next_states, dones = zip(*transitions)
+        return (
+            np.array(states, dtype=np.float32),
+            np.array(actions, dtype=np.int64),
+            np.array(rewards, dtype=np.float32),
+            np.array(next_states, dtype=np.float32),
+            np.array(dones, dtype=np.float32),
+            indices, is_weights,
+        )
+
+    def update_priorities(self, indices, td_errors):
+        &quot;&quot;&quot;Update priorities after learning.&quot;&quot;&quot;
+        for idx, error in zip(indices, td_errors):
+            priority = (abs(error) + self.epsilon) ** self.alpha
+            self.tree.update(idx, priority)
+            self.max_priority = max(self.max_priority, priority)
+
+    def __len__(self):
+        return self.tree.size
+</code></pre></div>
+<h2>Dueling Networks</h2>
+<p>Standard deep Q-networks try to estimate the total value of taking a specific action in a specific state all at once. Dueling DQN optimizes this by splitting the network’s head into two separate streams: one that estimates the State-Value function $V(s)$ (how good it is to be in this state, regardless of action), and another that calculates the Advantage function $A(s,a)$ (how much better a specific action is compared to the state's average). By decoupling these two metrics, the network can learn which states are inherently valuable or dangerous without needing to obsessively learn the outcome of every single action available in that state.</p>
+<h2>Noisy Nets</h2>
+<p>Classic DQN relies on a crude exploration strategy called $\varepsilon$-greedy, where the agent occasionally takes a completely random action based on a decaying probability threshold. Noisy Nets replace this erratic guessing game by adding parametric noise directly to the weights of the linear layers within the neural network itself. Because this noise is part of the network's parameters, the agent can naturally learn to reduce its own inner uncertainty over time. This gives the agent a much more stable, state-dependent mechanism for exploration, allowing it to systematically try new strategies in complex environments where random actions would fail.</p>
+<h2>Distributional RL</h2>
+<p>Traditional reinforcement learning aims to model the expected return—the average reward an agent anticipates over the long run. Distributional RL radically shifts this paradigm by mapping the entire probability distribution of value returns ($Z$) rather than just a single mean number. Instead of asking, "What is my average expected reward?", a distributional framework tracks the full spectrum of potential outcomes, including risks and high-payoff anomalies. This gives the agent a massive performance boost, especially in highly unpredictable or chaotic environments, by providing a much richer, multi-faceted understanding of future rewards.</p>
+<h2>N-step Learning</h2>
+<p>Standard Q-learning operates on a strict single-step update rule: the agent takes an action, observes a single immediate reward, and estimates the rest of the future using its current network weights. N-step learning expands this horizon by accumulating rewards over $n$ consecutive steps before looking at the network's bootstrap estimate. This simple adjustment strikes an elegant balance in the classic bias-variance tradeoff. By looking further down the road, the agent relies less on its own potentially inaccurate neural network approximations (reducing bias) while avoiding the instability of tracking an entire episode to the very end (controlling variance), resulting in vastly accelerated propagation of reward signals.</p>
+<h2>The Grand Finale: Rainbow DQN</h2>
+<p>Individually, each extension we have discussed addresses a distinct, fundamental flaw in the original Deep Q-Network design. But a burning question remained for researchers: Are these independent patches, or can they be combined to build something truly definitive?</p>
+<p>In 2017, researchers at DeepMind answered this by integrating all six extensions—Double DQN, Prioritized Experience Replay, Dueling Networks, Noisy Nets, Distributional RL, and N-step Learning—into a single agent named Rainbow DQN.</p>
+<p>What makes Rainbow so elegant is that these components don't just sit alongside one another; they actively harmonize. For instance, Noisy Nets provide advanced exploration, completely replacing the need for classic $\varepsilon$-greedy exploration. Meanwhile, Prioritized Experience Replay measures priority using Kullback-Leibler (KL) divergence (a way to compare probability distributions) because Distributional RL has replaced single-value outputs with full reward distributions.</p>
+<p>By accumulating rewards across several frames with N-step Learning and neutralizing maximization bias using a Double DQN target scheme, Rainbow achieved a massive leap in data efficiency and raw score metrics, establishing a classic milestone for state-of-the-art, value-based deep reinforcement learning.</p>
+</article>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a>
+    </p>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
   <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
   <canvas id="particles-canvas"></canvas>
   <nav class="navbar">
@@ -28,8 +30,10 @@
   <div class="week-hero">
     <a href="../index.html#timeline" class="back-link">← Back to Timeline</a>
     <div class="hero-badge"><span class="dot"></span> Week 3</div>
-    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);"><span class="gradient">PPO & Baseline Implementation</span></h1>
-    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">Policy gradient methods and first MuJoCo simulation.</p>
+    <h1 class="hero-title" style="font-size:clamp(2rem,4vw,3rem);"><span class="gradient">PPO & Baseline
+        Implementation</span></h1>
+    <p class="hero-subtitle" style="margin:12px auto 0; text-align:center;">Policy gradient methods and first MuJoCo
+      simulation.</p>
   </div>
   <div class="week-content">
     <h2>Topics Covered</h2>
@@ -40,14 +44,99 @@
       <li>First simulation run and analysis</li>
     </ul>
     <h2>Resources</h2>
+
+    <div class="narrative-section">
+
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">Policy Gradient Methods</h3>
+      <p>Policy gradient methods are a class of policy-based reinforcement learning algorithms that aim to learn a
+        policy directly by optimizing a performance objective.</p>
+      <p>They use gradient ascent to update the policy parameters in the direction of the gradient of the expected
+        reward.</p>
+      <p>The policy gradient theorem provides an unbiased estimate of the gradient of the expected reward, allowing us
+        to use gradient-based optimization methods to learn the policy.</p>
+      <p>A key challenge in policy gradient methods is that they can be very sensitive to hyperparameter choices. Small
+        changes in hyperparameters can lead to large changes in performance, making them difficult to tune.</p>
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">Proximal Policy Optimization (PPO)
+      </h3>
+      <p>PPO is a policy gradient algorithm that aims to address the instability and sensitivity to hyperparameter
+        choices of standard policy gradient methods.</p>
+      <p>It achieves this by constraining the policy updates to stay close to the previous policy, preventing large and
+        potentially destructive updates.</p>
+      <p>The main idea behind PPO is to use a surrogate objective function that is easier to optimize than the original
+        objective function. This surrogate objective function is designed to be "close" to the original objective
+        function, ensuring that policy updates stay within a reasonable range.</p>
+
+      <h3 style="color: var(--accent-orange); margin-top: 24px; margin-bottom: 12px;">How PPO Works</h3>
+      <p>To achieve this, PPO uses a clipped surrogate objective function. This function penalizes large policy updates,
+        encouraging the policy to stay close to the previous policy.</p>
+      <p>The algorithm works as follows:</p>
+      <ol>
+        <li>Sample trajectories from the current policy.</li>
+        <li>Compute the advantages for each state-action pair.</li>
+        <li>Compute the clipped surrogate objective function.</li>
+        <li>Optimize the objective function using gradient ascent.</li>
+        <li>Update the policy using the optimized objective function.</li>
+      </ol>
+    </div>
+
+    <h2>Practical Implementation</h2>
+    <p>This week, we started working with a MuJoCo-based environment called <strong>Continual-Bench</strong>. It is a
+      benchmark environment designed specifically for studying continual learning in robotics. It includes various
+      manipulation tasks, such as opening a faucet, adjusting the volume, and turning a knob.</p>
+
+    <div class="narrative-section">
+      <p><strong>Continual-Bench</strong> is a unified benchmark for continual learning. It provides a set of robotic
+        tasks with varying levels of difficulty and complexity, making it suitable for studying different aspects of
+        continual learning. The benchmark allows researchers to evaluate their continual learning algorithms on a
+        standardized set of tasks, enabling fair comparison between different methods.</p>
+      <p>The benchmark provides different tasks for evaluating continual learning algorithms. Some of the key tasks
+        include:</p>
+      <ul>
+        <li><strong>Open Faucet</strong>: Opening a faucet by adjusting the handle.</li>
+        <li><strong>Adjust Volume</strong>: Adjusting the volume of a speaker by turning the knob.</li>
+        <li><strong>Turn Knob</strong>: Turning a knob to control a mechanism.</li>
+        <li><strong>Flip Lid</strong>: Flipping a lid open or closed.</li>
+      </ul>
+      <p>Each task has different characteristics, such as:</p>
+      <ul>
+        <li><strong>Observation space</strong>: The size and type of observations vary across tasks.</li>
+        <li><strong>Action space</strong>: The action space also varies across tasks, with some tasks having continuous
+          actions and others having discrete actions.</li>
+        <li><strong>Reward function</strong>: The reward function is designed to encourage the agent to achieve the task
+          goal.</li>
+      </ul>
+      <p>Overall, Continual-Bench provides a comprehensive platform for studying continual learning in robotics,
+        allowing researchers to evaluate their algorithms on a standardized set of tasks and compare their performance
+        on different aspects of continual learning.</p>
+    </div>
     <div class="resource-list">
-      <a href="https://www.geeksforgeeks.org/proximal-policy-optimizationppo-in-reinforcement-learning/" target="_blank" class="resource-item">
-        
-        <div class="r-info"><h4>PPO: GeeksforGeeks</h4><p>Blog post on Proximal Policy Optimization</p></div>
+      <a href="https://www.youtube.com/watch?v=EvHRQhMX7_w&list=PLoROMvodv4rPwxE0ONYRa_itZFdaKCylL" target="_blank" class="resource-item">
+        <div class="r-info">
+          <h4>CS224R: Deep Reinforcement Learning</h4>
+          <p>A more mathematical resource for in-depth understanding. You may watch up to Lecture 4, or even the full course!</p>
+        </div>
+      </a>
+      <a href="https://www.geeksforgeeks.org/machine-learning/a-brief-introduction-to-proximal-policy-optimization/"
+        target="_blank" class="resource-item">
+
+        <div class="r-info">
+          <h4>PPO: GeeksforGeeks</h4>
+          <p>Blog post on Proximal Policy Optimization</p>
+        </div>
       </a>
     </div>
+
+    <h2>Assignment</h2>
+    <div class="assignment-block">
+      <p><a href="../assignments/week3.html" class="btn btn-primary" style="display:inline-block; margin-top:10px; color: #0d0d0f !important;">View Week 3 Assignment Details →</a></p>
+    </div>
   </div>
-  <footer class="footer"><p><a href="week2.html">← Week 2</a> · <a href="../index.html">Home</a> · <a href="week4.html">Week 4 →</a></p></footer>
+  <footer class="footer">
+    <p><a href="week2.html">← Week 2</a> · <a href="../index.html">Home</a> · <a href="week4.html">Week 4 →</a></p>
+  </footer>
   <script src="../script.js"></script>
 </body>
+
 </html>
