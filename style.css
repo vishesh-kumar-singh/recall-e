@@ -193,8 +193,9 @@ section { position:relative; z-index:1; padding:100px 48px; }
 .timeline-link:hover { color:var(--accent-orange); gap:10px; }
 
 /* ===== RESOURCES ===== */
-.resources-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1200px; margin:0 auto; }
+.resources-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; max-width:1200px; margin:0 auto; }
 .resource-card {
+  flex: 1 1 280px; max-width: 380px; text-align: left;
   background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius);
   padding:28px; transition:var(--transition); text-decoration:none; color:inherit; display:block;
 }

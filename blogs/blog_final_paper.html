@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RECALL-E: Continual Reinforcement Learning via Online World Models | Recall-E</title>
+  <meta name="description" content="A study on the RECALL-E framework for continual reinforcement learning and online world models.">
+  <link rel="icon" href="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true, theme: 'dark'});</script>
+  <style>
+    /* Additional styles specific for blog reading experience */
+    .blog-header {
+      padding: 120px 48px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      color: var(--text-secondary);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .blog-meta .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bg-primary);
+    }
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+    .blog-content h2 {
+      color: var(--accent-orange);
+      margin: 48px 0 24px;
+      font-size: 1.8rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+    .blog-content h3 {
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      font-size: 1.4rem;
+    }
+    .blog-content p {
+      margin-bottom: 24px;
+    }
+    .blog-content ul, .blog-content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .blog-content li {
+      margin-bottom: 8px;
+      color: #e0e0e0;
+    }
+    .blog-content img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      margin: 32px 0;
+      border: 1px solid var(--border-color);
+    }
+    .blog-content .image-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: -24px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .blog-content blockquote {
+      border-left: 4px solid var(--accent-orange);
+      padding-left: 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: rgba(232, 135, 58, 0.05);
+      padding: 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .blog-content .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      margin: 32px 0;
+      overflow-x: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+    }
+    .blog-content .code-block pre {
+      margin: 0;
+      font-family: inherit;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/BCS-Logo-Picsart-AiImageEnhancer.png" alt="BCS Logo">
+      <span>Recall<span class="highlight">-E</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#resources">Resources</a></li>
+      <li><a href="../index.html#blogs">Blogs</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </nav>
+
+  <div class="blog-header">
+    <a href="../index.html#blogs" class="back-link" style="display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; margin-bottom:24px; transition:0.3s;">← Back to All Blogs</a>
+    <div class="hero-badge" style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(232,135,58,0.1); border:1px solid rgba(232,135,58,0.3); border-radius:50px; font-size:0.85rem; color:var(--accent-orange); margin-bottom:24px; font-family:'Space Mono',monospace;">
+      <span class="dot" style="width:8px; height:8px; background:var(--accent-orange); border-radius:50%; animation: pulse 2s infinite;"></span>
+      Final Paper Blog
+    </div>
+    <h1 class="hero-title" style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:16px;">
+      <span class="gradient" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber), var(--accent-blue)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">RECALL-E: Continual Reinforcement Learning via Online World Models</span>
+    </h1>
+    
+    <div class="blog-meta">
+      <div style="display:flex; margin-right:8px;">
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); z-index: 5;">C</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 4;">N</div>
+        <div class="author-avatar" style="border: 2px solid var(--bg-primary); margin-left: -15px; z-index: 3;">A</div>
+      </div>
+      <div style="text-align: left;">
+        <div style="color: var(--text-primary); font-weight: 700;">Chaitanya, Nishant, Adrija</div>
+        <div>Date: August 12, 2026</div>
+      </div>
+    </div>
+  </div>  
+
+  <article class="blog-content">
+
+    <h2>1. Environment Frameworks: Continual vs. Unified World</h2>
+
+    <h3>Continual World</h3>
+    <p>In the standard Continual World framework, an agent tackles tasks sequentially. However, typical models work with an inconsistent state space across tasks. Because they learn task-by-task rather than mapping out a single, unified set of world dynamics, the network undergoes <strong>catastrophic forgetting</strong> when shifting across distinct task boundaries.</p>
+
+    <h3>Unified World (Continual Bench)</h3>
+    <p>In a Unified World framework—such as <strong>Continual Bench</strong>—tasks are arranged spatially rather than strictly temporally.</p>
+    <ul>
+      <li><strong>Global Physics:</strong> All tasks share a single, consistent state space and a unified set of world dynamics ($P^u$).</li>
+      <li><strong>Zero Forgetting:</strong> Instead of fitting isolated habits task-by-task, the agent learns a global representation of physics. Because the physics of the environment do not alter, the agent updates incrementally and remains immune to catastrophic forgetting.</li>
+    </ul>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>2. Agenda & Reward System</h2>
+    <p>The primary objective is to maximize the cumulative long-term return across all sequentially presented tasks without losing historical proficiencies.</p>
+    <ul>
+      <li><strong>Follow-The-Leader (FTL):</strong> The agent employs an FTL online learning scheme to build a highly stable world model.</li>
+      <li><strong>Task-Driven Distributional Shifts:</strong> While the underlying physics remain static, the reward function ($R^\tau$) varies over time according to the active task primitive. The agent naturally shifts its real-world trajectory to maximize the currently active reward, inducing a severe distributional data shift that standard networks cannot tolerate.</li>
+    </ul>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>3. Planning, Shift-Initialization, and MPC</h2>
+    <p>Action selection is handled via a derivative-free stochastic optimization loop paired with Model Predictive Control (MPC):</p>
+    
+    <h3>The Optimization Process</h3>
+    <ol>
+      <li><strong>Gaussian Trajectory Distribution:</strong> The planner initializes a candidate distribution using a mean action sequence ($\mu$) and an initial variance matrix ($\sigma$) over a fixed planning horizon $H$.</li>
+      <li><strong>Stochastic Sampling ($N$):</strong> The system generates $N$ candidate action sequences. It incorporates <strong>temporal colored noise</strong> to promote smooth, continuous physical exploration rather than chaotic adjustments.</li>
+      <li><strong>Mental Rollouts:</strong> Each action candidate sequence is simulated inside the agent's learned world model ($W$) to project future states and compute their expected rewards.</li>
+      <li><strong>Elite Fitting:</strong> The top $10\%$ highest-rewarding sequences are isolated. The mean and variance are re-fitted to these elite paths, narrowing down the Gaussian curve toward a highly optimal trajectory. This refinement loop is executed over $K$ internal iterations.</li>
+      <li><strong>Model Predictive Control (MPC):</strong> The robot executes only the <em>very first action</em> ($a_t$) of the optimized sequence in the real world, discarding the remaining $H-1$ steps.</li>
+      <li><strong>Shift-Initialization:</strong> Rather than recomputing the planning distribution from absolute scratch on the next step, the planner takes the unused $H-1$ steps from the previous plan, shifts them forward by one step, and appends a baseline guess at the end. This significantly accelerates convergence during real-time tracking.</li>
+    </ol>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>4. Online Agent Architecture & Sparsity</h2>
+    <p>To accommodate rapid real-time updates without backpropagation, the Online Agent (OA) utilizes a wide, shallow architecture driven by linear algebra:</p>
+
+    <h3>Wide Shallow Network & Structural Isolation</h3>
+    <p>The network consists of a fixed, high-dimensional random projection layer followed by a single trainable linear layer ($W$). Because the input is parsed into an exceptionally wide feature space, different physical task states trigger entirely localized, separate clusters of neurons. Adjusting weights for a new task alters parameters only within an active sub-block, keeping historical parameters safely locked down.</p>
+
+    <h3>The FTL Mathematical Engine</h3>
+    <p>Instead of keeping a raw history of experiences, the agent tracks its lifetime progress continuously via two cumulative matrices:</p>
+    <ul>
+      <li><strong>Matrix $A$ ($D \times D$):</strong> Accumulates the feature-to-feature correlation summaries over time.</li>
+      <li><strong>Matrix $B$ ($D \times S$):</strong> Accumulates the feature-to-target output correlations.</li>
+      <li><strong>Vector $y_t$:</strong> Tracks the true environmental state delta ($s_{t+1} - s_t$) produced by an action.</li>
+    </ul>
+
+    <p>$$W_{s}^{(t)}=(A_{ss}^{(t-1)}+\frac{1}{\lambda}I)^{-1}(B_{s}^{(t-1)}-A_{s\overline{s}}^{(t-1)}W_{\overline{s}}^{(t-1)})$$</p>
+
+    <h3>Computation Bounds via Sparsity</h3>
+    <p>Because the encoder forces a top-$K$ selection mechanism where $K \ll D$, the vast majority of the network stays completely quiet. When solving the analytical weight step, the model slices out submatrices ($A_{ss}$, $B_s$) linked exclusively to the active coordinates ($s$). This keeps matrix inversion highly localized and bounds step-by-step processing costs.</p>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>5. Metrics & Analytical Mechanics</h2>
+    
+    <h3>Regret</h3>
+    <p>Regret mathematically captures the online performance penalty of the system. It is calculated as the integrated area representing the performance gap between a perfect Oracle model (which achieves a constant $1.0$ success rate) and the live Online Agent. Theorem 1 proves that the Online Agent achieves a sublinear regret bound, proving that error growth slows down and performance stabilizes.</p>
+
+    <h3>Soft Binning</h3>
+    <p>Inputs mapped between $0$ and $1$ via a sigmoid function are projected onto a grid containing $\Lambda$ bins. The encoder uses a soft-binning function to find the lower and upper integer boundary edges enclosing the coordinate:</p>
+    <p>$$s_i = [\lfloor I_i \rfloor, \quad \lfloor I_i \rfloor + 1]$$</p>
+    <p>The dimensions of the total feature matrix scale according to the number of random features ($d$) and the bin width ($\Lambda$) such that $D = d \times \Lambda$. Higher values of $\Lambda$ broaden the total hidden layer, giving the network wider parameter capacity.</p>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>6. Baseline Performance Comparison</h2>
+
+    <div style="overflow-x: auto; margin: 32px 0;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; color: #e0e0e0;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border-color); background: rgba(255,255,255,0.05);">
+            <th style="padding: 12px; border: 1px solid var(--border-color);">Model / Approach</th>
+            <th style="padding: 12px; border: 1px solid var(--border-color);">Plasticity (New Learning)</th>
+            <th style="padding: 12px; border: 1px solid var(--border-color);">Stability (Retention)</th>
+            <th style="padding: 12px; border: 1px solid var(--border-color);">Regret Metric Evaluation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 12px; border: 1px solid var(--border-color);"><strong>Fine-Tuning</strong></td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Highly Adaptive</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Immediate Catastrophic Forgetting</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Extremely High Regret Accumulation</td>
+          </tr>
+          <tr style="background: rgba(255,255,255,0.02);">
+            <td style="padding: 12px; border: 1px solid var(--border-color);"><strong>Synaptic Intelligence (SI)</strong></td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Moderate Plasticity</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Alleviates forgetting marginally on early steps</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">High Regret; Struggles with complex shifts</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px; border: 1px solid var(--border-color);"><strong>Coreset (Replay)</strong></td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Adaptive</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Degrades as old sample representation drops</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Moderate Regret; limited by buffer size</td>
+          </tr>
+          <tr style="background: rgba(255,255,255,0.02);">
+            <td style="padding: 12px; border: 1px solid var(--border-color);"><strong>Perfect Memory</strong></td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">High upfront cost</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Absolute retention via exhaustive replay</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Low Regret but computationally impractical</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px; border: 1px solid var(--border-color);"><strong>Online Agent (OA)</strong></td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Instant Convergence</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color);">Absolute retention via structural isolation</td>
+            <td style="padding: 12px; border: 1px solid var(--border-color); color: var(--accent-orange);"><strong>Lowest Regret</strong> with fixed constant overhead</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Performance Analysis</h3>
+    <ul>
+      <li><strong>Fine-Tuning:</strong> The model learns the first task effectively, but as it sequentially encounters further tasks, it suffers from catastrophic forgetting, causing performance on earlier tasks to collapse.</li>
+      <li><strong>Online Agent (OA):</strong> By training incrementally, the agent maintains a success rate equivalent to the "Perfect Memory" baseline, effectively countering catastrophic forgetting without storing all historical data.</li>
+      <li><strong>SI & Coreset:</strong> These approaches show reasonable success on the initial two tasks, but their performance diminishes significantly as the sequence of tasks grows, as they cannot maintain stability over long-term continual learning.</li>
+    </ul>
+
+    <h3>Sparse Model Dynamics</h3>
+    <ul>
+      <li><strong>Neuron Utilization:</strong> As the agent interacts with sequential tasks, network space utilization gradually grows. Due to the exact closed-form summarization, even if the model reaches near-maximum parameter utilization, it safely tracks an overall least-squares solution without overwriting old parameters.</li>
+      <li><strong>Performance Scaling:</strong> The model demonstrates that performance scales positively with increased utilization and a higher number of soft bins ($\Lambda$), providing the agent with more capacity to map complex world dynamics.</li>
+    </ul>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>7. Hyperparameter Configurations</h2>
+    <p>To establish an optimal sparse world model layout, the paper applies the following default hyperparameters:</p>
+    <ul>
+      <li><strong>Number of Projections ($d$):</strong> 300 Losse Features</li>
+      <li><strong>Bin Count ($\Lambda$):</strong> 9 bins (swept across 5, 7, 9, 11)</li>
+      <li><strong>Regularization Weight ($\frac{1}{\lambda}$):</strong> 0.005</li>
+      <li><strong>Planning Horizon ($H$):</strong> 15 steps</li>
+      <li><strong>CEM Refinement Iterations ($K$):</strong> 3 iterations</li>
+      <li><strong>Sample Paths ($N$):</strong> 150 candidates</li>
+      <li><strong>Elite Cutoff Ratio:</strong> 0.1 ($10\%$)</li>
+    </ul>
+
+    <hr style="border-color: var(--border-color); opacity: 0.5; margin: 40px 0;">
+
+    <h2>8. Unified Training & Interaction Flow</h2>
+    
+    <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: var(--radius-sm); overflow-x: auto; margin-bottom: 32px;">
+      <pre class="mermaid">
+flowchart TD
+    Start(["Start: Agent Lifelong Loop (A.2)"]) --> RecvState["Receive Current State s_t"]
+    RecvState --> NewTask{"Is it a new task /<br/>task change? (A.2)"}
+    NewTask -->|YES| ResetMu["Reset μ_t to<br/>baseline initials"]
+    NewTask -->|NO| ShiftInit["Apply Shift-Initialization<br/>to μ_t"]
+    ResetMu --> WorldModel
+    ShiftInit --> WorldModel
+
+    WorldModel["Line 7: Closed-Form World Model Update (A.2)<br/>• Identify active feature indices (s)<br/>• Analytically solve W_s weights instantly"]
+    WorldModel --> CEMEnter[/"ENTER PLANNED POLICY GENERATION: CEM (A.4)"/]
+
+    subgraph CEM["CEM Loop"]
+        CEMEnter --> InitSigma["Initialize σ_init"]
+        InitSigma --> LoopStart["Loop k = 1 to K"]
+        LoopStart --> Sample["Sample N=150 Action Path Candidates<br/>• Centered at μ, with temporal Colored Noise<br/>• Carry over elite memory samples from k-1 (if k>1)"]
+        Sample --> Rollout["Run Mental Rollouts in World Model<br/>• Predict state shifts using learned weights W<br/>• Evaluate simulated returns via Reward Function R"]
+        Rollout --> Elite["Identify Top 10% Elite Candidates<br/>• Fit a new Gaussian distribution to winners<br/>• Update μ and σ parameters for next generation"]
+        Elite --> KCheck{"Does k equal K?"}
+        KCheck -->|NO| LoopStart
+        KCheck -->|YES| Output["Output Final Optimized<br/>Matrix μ_(t+1)"]
+    end
+
+    Output --> CEMExit[/"EXIT PLANNED POLICY GENERATION: CEM"/]
+    CEMExit --> Execute["Execute First Action a_t<br/>in Real World (A.2)"]
+    Execute --> NewState["Arrive at New State s_(t+1)"]
+    NewState --> Delta["Calculate Experience Delta Summary (A.2)<br/>• Input: x_t = [s_t, a_t]<br/>• Outcome target: y_t = s_(t+1) - s_t"]
+    Delta --> SparseProj["Line 11: Sparse Feature Projection (A.2)<br/>• Pass x_t through Random Matrix P and Sigmoid<br/>• Run Soft-Binning using grid size Λ<br/>• Isolate nonzero activated index positions (s)"]
+    SparseProj --> IncUpdate["Lines 12-13: Incremental Matrix Updates (A.2)<br/>• Add feature correlation directly to Matrix A_ss<br/>• Add feature-target correlation directly to Matrix B_s"]
+    IncUpdate --> IncStep["Increment Step: t ← t + 1"]
+    IncStep -.->|"loop back to next step"| RecvState
+      </pre>
+    </div>
+
+  </article>
+
+  <footer class="footer">
+    <p>
+      <a href="../index.html">← Back to Home</a>
+    </p>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>

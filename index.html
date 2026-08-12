@@ -57,27 +57,50 @@
   </section>
 
   <!-- Showcase -->
-  <section class="showcase-section">
+  <section class="showcase-section" id="showcase">
+    <div class="section-header reveal" style="margin-bottom: 40px;">
+      <p class="section-tag">// Single-Task Baseline</p>
+      <h2 class="section-title">Independent PPO Models</h2>
+      <p class="section-subtitle">Three different models, each trained independently on a single specific task.</p>
+    </div>
     <div class="showcase-grid">
       <div class="showcase-card reveal">
         <img src="assets/door_best_model_eval.gif" alt="Door opening task">
         <div class="showcase-overlay">
           <h4>Door Opening</h4>
-          <p>PPO agent trained to open a door handle in MuJoCo</p>
+          <p>PPO agent trained exclusively on door opening</p>
         </div>
       </div>
       <div class="showcase-card reveal">
         <img src="assets/peg_best_model_eval.gif" alt="Peg insertion task">
         <div class="showcase-overlay">
           <h4>Peg Removal</h4>
-          <p>PPO agent performing precise peg removal from hole</p>
+          <p>PPO agent trained exclusively on peg removal</p>
         </div>
       </div>
       <div class="showcase-card reveal">
         <img src="assets/window_best_model_eval.gif" alt="Window opening task">
         <div class="showcase-overlay">
           <h4>Window Opening</h4>
-          <p>PPO agent sliding a window open in simulation</p>
+          <p>PPO agent trained exclusively on window sliding</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header reveal" style="margin-top: 80px; margin-bottom: 40px;">
+      <p class="section-tag">// The Solution</p>
+      <h2 class="section-title">Continual Learning Agent</h2>
+      <p class="section-subtitle">One single model trained sequentially across multiple tasks without catastrophic forgetting.</p>
+    </div>
+    <div class="showcase-grid" style="grid-template-columns: 1fr; max-width: 800px;">
+      <div class="showcase-card reveal" style="border: 1px solid var(--accent-orange); box-shadow: 0 0 30px rgba(232,135,58,0.1);">
+        <video autoplay loop muted playsinline style="width: 100%; display: block;">
+          <source src="assets/Final.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="showcase-overlay" style="background: linear-gradient(0deg, rgba(13,13,15,0.9) 0%, rgba(13,13,15,0) 100%); align-items: flex-start; justify-content: flex-end; text-align: left; padding: 32px;">
+          <h4 style="font-size: 1.4rem; color: var(--accent-orange);">Sequential Multi-Task Mastery</h4>
+          <p style="font-size: 1rem;">Our unified agent performing multiple tasks continuously, leveraging Shallow World Models.</p>
         </div>
       </div>
     </div>
@@ -157,6 +180,16 @@
         <h4>Deep Q-Networks & Tuning</h4>
         <p>Full resource list: Deep Q-Learning, DQN, Double DQN, and advanced variants including Rainbow DQN.</p>
       </a>
+      <a href="weeks/week3.html" class="resource-card reveal">
+        <span class="resource-type docs">Week 3</span>
+        <h4>PPO & Baseline Implementation</h4>
+        <p>Full resource list: Proximal Policy Optimization (PPO) theory, setting up Continual-Bench & MuJoCo, and single-task arm training.</p>
+      </a>
+      <a href="sessions/final.pdf" target="_blank" class="resource-card reveal">
+        <span class="resource-type docs">Week 5-8</span>
+        <h4>Continual Learning & World Models</h4>
+        <p>Topics covered: World Models, Shallow World Models, Cross-Entropy Method (CEM), and Follow the Leader method.</p>
+      </a>
     </div>
   </section>
 
@@ -196,6 +229,15 @@
         <div style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
           <span>By Prakhar, Priyanka, Harpal, Hemendra</span>
           <span>June 08, 2026</span>
+        </div>
+      </a>
+      <a href="blogs/blog_final_paper.html" class="resource-card reveal">
+        <span class="resource-type docs">Paper Summary</span>
+        <h4>RECALL-E: Continual Reinforcement Learning via Online World Models</h4>
+        <p>A technical summary of the RECALL-E framework paper, laying the foundation for our upcoming implementation and final report.</p>
+        <div style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <span>By Chaitanya, Nishant, Adrija</span>
+          <span>August 12, 2026</span>
         </div>
       </a>
     </div>
@@ -265,10 +307,10 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot active"><span>3</span></div>
+        <div class="timeline-dot completed"><span>3</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 3</span>
-          <span class="status active">● Active</span>
+          <span class="status completed">✓ Completed</span>
           <h3>PPO & Baseline Implementation</h3>
           <p>Policy gradient methods and first simulation results.</p>
           <ul>
@@ -283,10 +325,10 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot active"><span>4</span></div>
+        <div class="timeline-dot completed"><span>4</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 4: Mid Eval</span>
-          <span class="status active">● Active</span>
+          <span class="status completed">✓ Completed</span>
           <h3>Introduction to Continual Learning</h3>
           <p>The core problem: catastrophic forgetting in sequential task learning.</p>
           <ul>
@@ -303,17 +345,16 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot"><span>5</span></div>
+        <div class="timeline-dot completed"><span>5</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 5</span>
-          <span class="status upcoming">Upcoming</span>
+          <span class="status completed">✓ Completed</span>
           <h3>Model-Based Algorithms</h3>
           <p>Shifting from model-free to model-based RL approaches.</p>
           <ul>
             <li>Introduction to model-based RL</li>
-            <li>Deep World Models: Dreamer</li>
+            <li>Deep World Models</li>
             <li>Shallow World Model architecture</li>
-            <li>Implementing a deep-world algorithm</li>
           </ul>
           <!-- <a href="weeks/week5.html" class="timeline-link">View Resources →</a> -->
           <!-- <a href="assignments/week5.html" class="timeline-link" style="display: flex; margin-top: 8px; width: fit-content;">View Assignment →</a> -->
@@ -321,10 +362,10 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot"><span>6</span></div>
+        <div class="timeline-dot completed"><span>6</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 6</span>
-          <span class="status upcoming">Upcoming</span>
+          <span class="status completed">✓ Completed</span>
           <h3>Model Predictive Controls</h3>
           <p>Planning and control with learned dynamics models.</p>
           <ul>
@@ -338,10 +379,10 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot"><span>7</span></div>
+        <div class="timeline-dot completed"><span>7</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 7</span>
-          <span class="status upcoming">Upcoming</span>
+          <span class="status completed">✓ Completed</span>
           <h3>Continual Learning with Shallow World Models</h3>
           <p>The main event: comparing retention across approaches.</p>
           <ul>
@@ -355,16 +396,13 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot"><span>8</span></div>
+        <div class="timeline-dot completed"><span>8</span></div>
         <div class="timeline-card">
           <span class="timeline-week">Week 8</span>
-          <span class="status upcoming">Upcoming</span>
+          <span class="status completed">✓ Completed</span>
           <h3>Final Analysis & Experimentation</h3>
           <p>Hyperparameter experiments and final report.</p>
           <ul>
-            <li>Sampling size experiments</li>
-            <li>Projection dimension tuning</li>
-            <li>Task ordering analysis</li>
             <li>Final report formulation</li>
           </ul>
           <div class="eval-banner" style="margin-top:16px; padding:16px; text-align:left;">
@@ -423,7 +461,8 @@
     </div>
     <div class="results-placeholder reveal">
       <h3>Coming Soon</h3>
-      <p>Results, analysis, and the final report will be published here after the project concludes in Week 8.</p>
+      <p>Results, analysis, and the final report will be published here once the project concludes. In the meantime, check out our technical summary of the inspiration paper!</p>
+      <a href="blogs/blog_final_paper.html" class="btn btn-primary" style="margin-top: 24px;">Read the Paper Summary →</a>
     </div>
   </section>
 
